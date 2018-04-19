@@ -3,10 +3,25 @@
   'rules': {
     'max-len': [1, 120, 2, {ignoreComments: true}],
     'import/no-unresolved': 'off',
-    'import/extensions': ['error', 'never', { 'packages': 'always' }]
+    'import/extensions': ['error', 'never', { 'packages': 'always' }],
+    'class-methods-use-this': ['error', {
+      exceptMethods: [
+        'render',
+        'getInitialState',
+        'getDefaultProps',
+        'componentWillMount',
+        'componentDidMount',
+        'componentWillReceiveProps',
+        'shouldComponentUpdate',
+        'componentWillUpdate',
+        'componentDidUpdate',
+        'componentWillUnmount',
+      ],
+    }],
   },
   'env': {
     'browser': true
   },
   'extends': ['airbnb-base', 'plugin:react/recommended']
 }
+
