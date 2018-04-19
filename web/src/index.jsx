@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MemberOverviewContainer from './containers/MemberOverviewContainer';
 
 const App = () => (
   <MuiThemeProvider >
-      <div>Initial project setup</div>
+      <MemberOverviewContainer />
   </MuiThemeProvider>
 );
 
