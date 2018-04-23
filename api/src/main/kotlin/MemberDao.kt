@@ -10,22 +10,18 @@ class MemberDao {
         3 to Member(id = 3, name = "Vincent de Bruijn", status = "Active"),
         4 to Member(id = 4, name = "Jerre van Veluw", status = "Active"),
         5 to Member(id = 5, name = "Jordi Franken", status = "Active"),
-        6 to Member(id = 6, name = "Ferdy van Varik", status = "Active")
+        6 to Member(id = 5, name = "Freddie", status = "Active")
+
     )
 
     var lastId: AtomicInteger = AtomicInteger(members.size - 1)
-
-    fun save(name: String, status: String) {
-        val id = lastId.incrementAndGet()
-        members.put(id, Member(id = id, name = name, status = status))
-    }
 
     fun findById(id: Int): Member? {
         return members[id]
     }
 
     fun findByName(name: String): Member? {
-        return members.values.find { it.name == name }
+        return members.values.find { it.name.toLowerCase().contains(name.toLowerCase()) }
     }
 
     fun update(id: Int, member: Member) {

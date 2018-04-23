@@ -22,10 +22,22 @@ fun main(args: Array<String>) {
         error(404) { ctx -> ctx.json("not found") }
     }.start()
 
+    app.routes {
+        get("/members") { ctx ->
+            ctx.json(ArrayList(memberDao.members.values))
+        }
 
-//    val willem = Member(id = 0, name = "Willem", status = "Terminated")
+        get("/members/name/:name") { ctx ->
+            ctx.json(memberDao.findByName(ctx.param("name")!!)!!)
+        }
 
-//    willem.name
-
-    app.get("/members") { ctx -> ctx.json(ArrayList(memberDao.members.values))}
+        patch("/members/update/:id") { ctx ->
+            val member = ctx.bodyAsClass(Member::class.java)
+            memberDao.update(
+                    id = ctx.param("id")!!.toInt(),
+                    member = member
+            )
+            ctx.status(204)
+        }
+    }
 }
