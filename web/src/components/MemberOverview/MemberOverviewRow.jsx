@@ -12,7 +12,7 @@ const MemberOverviewRow = props => (
     <TableRowColumn>{props.data.name}</TableRowColumn>
     <TableRowColumn>{props.data.status}</TableRowColumn>
     <TableRowColumn>
-      <MemberOverviewRowButton data={props.data} handleSave={props.handleSave}/>
+      <MemberOverviewRowButton data={props.data} handleAction={props.handleAction}/>
     </TableRowColumn>
   </TableRow>
 );
@@ -23,7 +23,7 @@ MemberOverviewRow.propTypes = {
     name: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }),
-  handleSave: PropTypes.func,
+  handleAction: PropTypes.func,
 };
 
 export default MemberOverviewRow;

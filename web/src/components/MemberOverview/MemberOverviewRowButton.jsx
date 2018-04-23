@@ -23,8 +23,8 @@ export default class MemberOverviewRowButton extends React.Component {
     this.setState({ open: false, editable: false });
   };
 
-  handleSave = () => {
-    this.props.handleSave({ id: this.props.data.id, data: this.editedMemberData });
+  handleAction = (action) => {
+    this.props.handleAction(action, { id: this.props.data.id, data: this.editedMemberData });
     this.handleClose();
   }
 
@@ -48,20 +48,27 @@ export default class MemberOverviewRowButton extends React.Component {
           label="Cancel"
           style={style}
           onClick={this.handleClose}
-          key={1}
+          key={0}
+        />,
+        <RaisedButton
+        label="Delete"
+        primary={true}
+        style={style}
+        onClick={() => this.handleAction('delete')}
+        key={1}
         />,
         <RaisedButton
         label="Save"
         primary={true}
         style={style}
-        onClick={this.handleSave}
-        key={0}
+        onClick={() => this.handleAction('save')}
+        key={2}
         />,
       ];
     } else {
       actions = [
-        <RaisedButton label="Edit" style={style} key={2} primary={true} onClick={this.handleEdit}/>,
-        <RaisedButton label="Close" style={style} key={3} onClick={this.handleClose}/>,
+        <RaisedButton label="Edit" style={style} key={3} primary={true} onClick={this.handleEdit}/>,
+        <RaisedButton label="Close" style={style} key={4} onClick={this.handleClose}/>,
       ];
     }
 

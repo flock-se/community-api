@@ -45,6 +45,18 @@ export default class MemberOverviewContainer extends React.Component {
     };
   }
 
+  handleAction = (action, memberData) => {
+    if (action === 'save') {
+      this.handleSave(memberData);
+    } else if (action === 'delete') {
+      this.handleDelete(memberData.id);
+    }
+  }
+
+  handleDelete = (memberId) => {
+    this.setState({ memberData: this.state.memberData.filter(item => memberId !== item.id) });
+  }
+  
   handleSave = (editedMember) => {
     const data = this.state.memberData.map((item) => {
       const result = item.id === editedMember.id ? editedMember.data : item;
@@ -56,7 +68,7 @@ export default class MemberOverviewContainer extends React.Component {
 
   render() {
     return (
-      <MemberOverview memberData={this.state.memberData} handleSave={this.handleSave}/>
+      <MemberOverview memberData={this.state.memberData} handleAction={this.handleAction}/>
     );
   }
 }

@@ -21,7 +21,7 @@ const MemberOverview = props => (
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false}>
-        {props.memberData.map(m => <MemberOverviewRow key={m.id} data={m} handleSave={props.handleSave}/>)}
+        {props.memberData.map(m => <MemberOverviewRow key={m.id} data={m} handleAction={props.handleAction}/>)}
       </TableBody>
     </Table>
   </div>
@@ -29,7 +29,7 @@ const MemberOverview = props => (
 
 MemberOverview.propTypes = {
   memberData: PropTypes.array,
-  handleSave: PropTypes.func,
+  handleAction: PropTypes.func,
 };
 
 export default MemberOverview;
