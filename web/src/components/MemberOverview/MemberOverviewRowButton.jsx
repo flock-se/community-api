@@ -115,5 +115,5 @@ MemberOverviewRowButton.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }),
-  handleSave: PropTypes.func,
+  handleAction: PropTypes.func,
 };
