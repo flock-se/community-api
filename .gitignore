@@ -1,6 +1,7 @@
 node_modules/
 .vscode/
 .gradle
+.idea
 /build/
 
 # Ignore Gradle GUI config
