@@ -2,10 +2,7 @@ package com.flock.community.api.controllers
 
 import com.flock.community.api.model.Member
 import com.flock.community.api.services.MemberService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController()
@@ -21,4 +18,10 @@ open class MemberController(private val memberService: MemberService) {
     fun findById(@PathVariable("id") id: String): Member? {
         return memberService.findById(id.toInt())
     }
+
+    @PostMapping("")
+    fun findById(): Long? {
+        return memberService.create()
+    }
+
 }
