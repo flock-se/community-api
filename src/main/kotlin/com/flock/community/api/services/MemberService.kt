@@ -28,6 +28,10 @@ class MemberService () {
         return members.find { x -> x.name.toLowerCase() == name.toLowerCase() }
     }
 
+    fun findAll(): List<Member> {
+        return members
+    }
+
 //    fun update(id: Int, member: Member) {
 //        members.put(id, Member(id = member.id, name = member.name, status = member.status))
 //    }
