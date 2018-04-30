@@ -48,7 +48,6 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
         return CommonOAuth2Provider.GOOGLE.getBuilder("google")
             .clientId(clientId.asText())
             .clientSecret(clientSecret.asText())
-            .
             .build()
     }
 
