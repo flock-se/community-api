@@ -20,7 +20,7 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.authorizeRequests()
+        http.sessionManagement().authorizeRequests()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
@@ -38,15 +38,17 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     private fun googleClientRegistration(): ClientRegistration {
 
-        val resource = this.javaClass.getClassLoader().getResourceAsStream("client_secret.json")
+        val resource = this.javaClass.classLoader.getResourceAsStream("client_secret.json")
+
         val json = objectMapper.readTree(resource)
 
-        val clientId = json.get("installed").get("client_id")
-        val clientSecret = json.get("installed").get("client_secret")
+        val clientId = json.get("web").get("client_id")
+        val clientSecret = json.get("web").get("client_secret")
 
         return CommonOAuth2Provider.GOOGLE.getBuilder("google")
             .clientId(clientId.asText())
             .clientSecret(clientSecret.asText())
+            .
             .build()
     }
 
