@@ -12,6 +12,10 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService
 import org.springframework.security.oauth2.client.registration.ClientRegistration
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository
+import java.io.File
+import org.springframework.web.server.adapter.WebHttpHandlerBuilder.applicationContext
+
+
 
 val objectMapper = ObjectMapper();
 
@@ -37,8 +41,9 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     private fun googleClientRegistration(): ClientRegistration {
-        val stream = ClassLoader.getSystemResource("client_secret.json").openStream()
-        val json = objectMapper.readTree(stream)
+
+        val resource = applicationContext.getResource("classpath:client_secret.json")
+        val json = objectMapper.readTree(resource.file)
 
         val clientId = json.get("installed").get("client_id")
         val clientSecret = json.get("installed").get("client_secret")
