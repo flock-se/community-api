@@ -1,4 +1,7 @@
 .vscode
 .idea
+*.iml
 
 target
+
+client_secret.json

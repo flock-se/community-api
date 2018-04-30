@@ -17,8 +17,8 @@ import sun.security.rsa.RSAPrivateCrtKeyImpl.newKey
 class MemberService() {
 
 
-    val datastore = DatastoreOptions.getDefaultInstance().getService();
-    val keyFactory = datastore.newKeyFactory().setKind("Members");
+    val datastore = DatastoreOptions.getDefaultInstance().getService()
+    val keyFactory = datastore.newKeyFactory().setKind("Members")
 
     val members = listOf(
         Member(id = 0, name = "Willem Kersten", status = "Active"),
