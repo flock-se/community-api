@@ -1,6 +1,5 @@
 package com.flock.community.api.config
 
-import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,9 +11,6 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService
 import org.springframework.security.oauth2.client.registration.ClientRegistration
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository
-import java.io.File
-import org.springframework.web.server.adapter.WebHttpHandlerBuilder.applicationContext
-
 
 
 val objectMapper = ObjectMapper();
@@ -42,8 +38,8 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     private fun googleClientRegistration(): ClientRegistration {
 
-        val resource = applicationContext.getResource("classpath:client_secret.json")
-        val json = objectMapper.readTree(resource.file)
+        val resource = this.javaClass.getClassLoader().getResourceAsStream("client_secret.json")
+        val json = objectMapper.readTree(resource)
 
         val clientId = json.get("installed").get("client_id")
         val clientSecret = json.get("installed").get("client_secret")
