@@ -39,7 +39,6 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
     private fun googleClientRegistration(): ClientRegistration {
 
         val resource = this.javaClass.classLoader.getResourceAsStream("client_secret.json")
-
         val json = objectMapper.readTree(resource)
 
         val clientId = json.get("web").get("client_id")
