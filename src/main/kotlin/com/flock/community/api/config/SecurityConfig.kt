@@ -20,7 +20,7 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.sessionManagement().authorizeRequests()
+        http.authorizeRequests()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
