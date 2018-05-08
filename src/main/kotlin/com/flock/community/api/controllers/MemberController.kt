@@ -20,14 +20,15 @@ open class MemberController(private val memberRepository: MemberRepository) {
         return memberRepository.findById(id.toInt())
     }
 
-    @PostMapping(consumes = ["application/json"])
+    @PostMapping()
     fun create(@RequestBody member: Member): Member {
         return memberRepository.save(member)
     }
 
-    @PostMapping("test")
-    fun test(): String {
-        return "Hallo213"
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable("id") id: String) {
+        memberRepository.deleteById(id.toInt())
     }
+
 
 }

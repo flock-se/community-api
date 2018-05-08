@@ -1,8 +1,8 @@
 package com.flock.community.api.repositories
 
 import com.flock.community.api.model.Member
+import com.flock.community.api.model.Status
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNull
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,8 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import org.springframework.test.context.junit4.SpringRunner
 import java.util.*
 
-@RunWith(SpringRunner::class)
 @DataJpaTest
+@RunWith(SpringRunner::class)
 open class MemberRepositoryTest {
 
     @Autowired
@@ -31,7 +31,7 @@ open class MemberRepositoryTest {
     fun testsCreate() {
         val member = Member(
             name = "Willem Veelenturf",
-            street = "Test"
+            status = Status.ACTIVE
         )
         val res = memberRepository.save(member)
 

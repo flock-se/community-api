@@ -13,5 +13,9 @@ data class Member(
     val id: Int = 0,
 
     val name: String,
-    val street: String
+    val status: Status
 )
+
+enum class Status{
+    ACTIVE
+}
