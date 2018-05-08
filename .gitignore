@@ -5,6 +5,3 @@
 *.iml
 
 target
-
-application.properties
-client_secret.json
