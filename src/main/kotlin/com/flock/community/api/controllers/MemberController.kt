@@ -1,27 +1,33 @@
 package com.flock.community.api.controllers
 
 import com.flock.community.api.model.Member
-import com.flock.community.api.services.MemberService
+import com.flock.community.api.repositories.MemberRepository
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 
-@RestController()
+@RestController
 @RequestMapping("/members")
-open class MemberController(private val memberService: MemberService) {
+open class MemberController(private val memberRepository: MemberRepository) {
 
-    @GetMapping()
+    @GetMapping
     fun findAll(): List<Member> {
-        return memberService.findAll()
+        return memberRepository.findAll().toList()
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable("id") id: String): Member? {
-        return memberService.findById(id.toInt())
+    fun findById(@PathVariable("id") id: String): Optional<Member> {
+        return memberRepository.findById(id.toInt())
     }
 
-    @PostMapping("")
-    fun findById(): Long? {
-        return memberService.create()
+    @PostMapping(consumes = ["application/json"])
+    fun create(@RequestBody member: Member): Member {
+        return memberRepository.save(member)
+    }
+
+    @PostMapping("test")
+    fun test(): String {
+        return "Hallo213"
     }
 
 }

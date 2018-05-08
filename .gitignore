@@ -1,7 +1,10 @@
+.DS_Store
+
 .vscode
 .idea
 *.iml
 
 target
 
+application.properties
 client_secret.json
