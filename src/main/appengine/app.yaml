@@ -1,4 +1,4 @@
-service: community
+service: community-api
 runtime: java
 env: flex
 runtime_config:
