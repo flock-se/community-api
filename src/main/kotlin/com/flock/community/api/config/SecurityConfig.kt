@@ -23,6 +23,7 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
             .authorizeRequests()
+            .antMatchers( "/_ah/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
