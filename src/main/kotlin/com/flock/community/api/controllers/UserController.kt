@@ -7,7 +7,7 @@ import java.security.Principal
 
 
 @RestController()
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 open class UserController() {
 
     @GetMapping("/me")
