@@ -20,9 +20,21 @@ open class MemberController(private val memberRepository: MemberRepository) {
         return memberRepository.findById(id.toInt())
     }
 
+    @GetMapping("/{ids}")
+    fun findByIds(@PathVariable("ids") ids: List<String>): List<Member> {
+        return memberRepository.findByIds(ids.map{it.toInt()})
+    }
+
     @PostMapping()
     fun create(@RequestBody member: Member): Member {
         return memberRepository.save(member)
+    }
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable("id") id: String, @RequestBody member: Member): Member {
+        return memberRepository.save(
+            member.copy(
+                id = id.toInt()))
     }
 
     @DeleteMapping("/{id}")

@@ -24,6 +24,7 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
         http.csrf().disable()
             .authorizeRequests()
             .antMatchers( "/_ah/**").permitAll()
+            .mvcMatchers( "/api/register").permitAll()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
