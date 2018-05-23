@@ -14,7 +14,7 @@ data class Member(
 
     val name: String,
     val email: String,
-    val status: Status,
+    val status: Status = Status.NEW,
 
     val street: String? = null,
     val houseNumber: String? = null

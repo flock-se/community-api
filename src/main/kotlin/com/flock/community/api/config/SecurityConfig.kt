@@ -25,6 +25,7 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
             .authorizeRequests()
             .antMatchers( "/_ah/**").permitAll()
             .mvcMatchers( "/api/register").permitAll()
+            .mvcMatchers( "/api/buckaroo/create").permitAll()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
