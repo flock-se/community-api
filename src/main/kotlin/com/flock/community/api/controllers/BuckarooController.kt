@@ -1,7 +1,6 @@
 package com.flock.community.api.controllers
 
 import com.fasterxml.jackson.databind.node.ObjectNode
-import com.flock.community.api.model.Member
 import com.flock.community.api.service.BuckarooService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

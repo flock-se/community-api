@@ -22,7 +22,7 @@ open class MemberController(private val memberRepository: MemberRepository) {
 
     @GetMapping("/{ids}")
     fun findByIds(@PathVariable("ids") ids: List<String>): List<Member> {
-        return memberRepository.findByIds(ids.map{it.toInt()})
+        return memberRepository.findByIds(ids.map { it.toInt() })
     }
 
     @PostMapping()
@@ -34,7 +34,9 @@ open class MemberController(private val memberRepository: MemberRepository) {
     fun update(@PathVariable("id") id: String, @RequestBody member: Member): Member {
         return memberRepository.save(
             member.copy(
-                id = id.toInt()))
+                id = id.toInt()
+            )
+        )
     }
 
     @DeleteMapping("/{id}")

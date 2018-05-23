@@ -1,9 +1,8 @@
 package com.flock.community.api.controllers
 
-import com.flock.community.api.model.Member
-import com.flock.community.api.repositories.MemberRepository
-import org.springframework.web.bind.annotation.*
-import java.util.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
@@ -11,7 +10,7 @@ import java.util.*
 open class HealthController {
 
     @GetMapping("/health")
-    fun health():String {
+    fun health(): String {
         return "OK"
     }
 

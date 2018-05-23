@@ -1,18 +1,11 @@
 package com.flock.community.api.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import org.springframework.security.config.oauth2.client.CommonOAuth2Provider
-import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService
-import org.springframework.security.oauth2.client.registration.ClientRegistration
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository
 import org.springframework.security.config.annotation.web.builders.WebSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
 val objectMapper = ObjectMapper()
 
@@ -23,9 +16,9 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
             .authorizeRequests()
-            .antMatchers( "/_ah/**").permitAll()
-            .mvcMatchers( "/api/register").permitAll()
-            .antMatchers( "/api/buckaroo/**").permitAll()
+            .antMatchers("/_ah/**").permitAll()
+            .mvcMatchers("/api/register").permitAll()
+            .antMatchers("/api/buckaroo/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
