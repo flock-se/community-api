@@ -25,34 +25,10 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
             .authorizeRequests()
             .antMatchers( "/_ah/**").permitAll()
             .mvcMatchers( "/api/register").permitAll()
-            .mvcMatchers( "/api/buckaroo/create").permitAll()
+            .antMatchers( "/api/buckaroo/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
-    }
-
-    @Bean
-    open fun clientRegistrationRepository(): ClientRegistrationRepository {
-        return InMemoryClientRegistrationRepository(this.googleClientRegistration())
-    }
-
-    @Bean
-    open fun authorizedClientService(): OAuth2AuthorizedClientService {
-        return InMemoryOAuth2AuthorizedClientService(this.clientRegistrationRepository())
-    }
-
-    private fun googleClientRegistration(): ClientRegistration {
-
-        val resource = this.javaClass.classLoader.getResourceAsStream("client_secret.json")
-        val json = objectMapper.readTree(resource)
-
-        val clientId = json.get("web").get("client_id")
-        val clientSecret = json.get("web").get("client_secret")
-
-        return CommonOAuth2Provider.GOOGLE.getBuilder("google")
-            .clientId(clientId.asText())
-            .clientSecret(clientSecret.asText())
-            .build()
     }
 
     /* To allow Pre-flight [OPTIONS] request from browser */
