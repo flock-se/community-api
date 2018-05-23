@@ -59,8 +59,7 @@ open class MemberRepositoryTest {
     fun testsCreate() {
         val member = Member(
             name = "Willem Veelenturf",
-            email = "willem.veelenturf@gmail.com",
-            status = Status.ACTIVE
+            email = "willem.veelenturf@gmail.com"
         )
         val res = memberRepository.save(member)
 
