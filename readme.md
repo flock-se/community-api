@@ -1,0 +1,3 @@
+- copy application.properties
+- gcloud config set project bring-the-elephant-home
+- gcloud auth application-default login
