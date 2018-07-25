@@ -14,7 +14,7 @@ data class User(
         val name: String,
         val email: String,
 
-        @ElementCollection
+        @ElementCollection(fetch = FetchType.EAGER)
         val authorities: List<String> = listOf()
 
 )

@@ -17,12 +17,12 @@ open class MemberController(private val memberRepository: MemberRepository) {
 
     @GetMapping("/{id}")
     fun findById(@PathVariable("id") id: String): Optional<Member> {
-        return memberRepository.findById(id.toInt())
+        return memberRepository.findById(id.toLong())
     }
 
     @GetMapping("/{ids}")
     fun findByIds(@PathVariable("ids") ids: List<String>): List<Member> {
-        return memberRepository.findByIds(ids.map { it.toInt() })
+        return memberRepository.findByIds(ids.map { it.toLong() })
     }
 
     @PostMapping()
@@ -41,7 +41,7 @@ open class MemberController(private val memberRepository: MemberRepository) {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: String) {
-        memberRepository.deleteById(id.toInt())
+        memberRepository.deleteById(id.toLong())
     }
 
 

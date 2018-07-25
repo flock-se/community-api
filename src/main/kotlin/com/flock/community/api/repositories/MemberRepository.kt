@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service
 
 
 @Service
-interface MemberRepository : CrudRepository<Member, Int> {
+interface MemberRepository : CrudRepository<Member, Long> {
 
     @Query("SELECT m FROM Member m WHERE m.id IN ?1")
-    fun findByIds(ids: List<Int>): List<Member>
+    fun findByIds(ids: List<Long>): List<Member>
 
     fun findByName(name: String): List<Member>
 }

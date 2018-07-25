@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
 
-@RepositoryRestController
+@RestController
 @RequestMapping("/api/users")
 open class UserController(private val userRepository: UserRepository) {
 
