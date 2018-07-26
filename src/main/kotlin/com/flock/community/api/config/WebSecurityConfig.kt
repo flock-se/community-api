@@ -12,7 +12,10 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.context.SecurityContextHolder
 
 
 private val TOKEN_HEADER = "Authorization"
@@ -26,9 +29,9 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
+
         http
                 .csrf().disable()
-
                 .antMatcher("/**")
                 .authorizeRequests()
                     .antMatchers("/", "/login**", "/webjars/**", "/error**").permitAll()
@@ -60,11 +63,12 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    fun authoritiesExtractor(): AuthoritiesExtractor {
+    fun authoritiesExtractor(userRepository: UserRepository): AuthoritiesExtractor {
+
         return AuthoritiesExtractor {
-            AuthorityUtils.createAuthorityList(
-                    UserAuthorities.READ.toName(),
-                    UserAuthorities.WRITE.toName())
+            val reference = it.get("email").toString()
+            val user = userRepository.findByReference(reference)
+            user?.authorities?.map { SimpleGrantedAuthority(it) } ?: listOf()
         }
     }
 

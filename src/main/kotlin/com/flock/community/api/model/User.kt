@@ -1,5 +1,6 @@
 package com.flock.community.api.model
 
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity
@@ -17,4 +18,4 @@ data class User(
         @ElementCollection(fetch = FetchType.EAGER)
         val authorities: List<String> = listOf()
 
-)
+):Serializable
