@@ -94,13 +94,17 @@
         <!-- Vaadin -->
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring-boot-starter</artifactId>
+            <artifactId>vaadin-core</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.github.appreciated</groupId>-->
-            <!--<artifactId>app-layout-addon</artifactId>-->
-            <!--<version>1.0.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>app-layout-addon</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 
         <!-- Databases - Uses HSQL by default -->
 		<dependency>
