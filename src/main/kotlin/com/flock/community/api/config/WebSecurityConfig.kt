@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -24,22 +26,22 @@ val objectMapper = ObjectMapper()
 
 @Configuration
 @EnableOAuth2Sso
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 open class SecurityConfig() : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
 
         http
-                .csrf().disable()
                 .antMatcher("/**")
                 .authorizeRequests()
                     .antMatchers("/", "/login**", "/webjars/**", "/error**").permitAll()
                     .antMatchers("/_ah/**").permitAll()
+                    .antMatchers("/frontend/**").permitAll()
                     .mvcMatchers("/api/register").permitAll()
                     .antMatchers("/api/buckaroo/**").permitAll()
-                .anyRequest()
-                    .authenticated()
+                    .anyRequest().authenticated()
     }
 
     @Bean

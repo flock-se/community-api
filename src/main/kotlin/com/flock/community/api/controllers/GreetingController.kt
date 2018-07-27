@@ -28,9 +28,17 @@ class GreetingController {
     }
 
     @GetMapping("/itssession")
-    fun itssession(request:HttpServletRequest): List<String>? {
-        System.out.println("---dd---------------")
-        return request.getSession(true).attributeNames.toList()
+    fun itssession(request:HttpServletRequest): String {
+
+        val session = request.getSession(true)
+
+
+        if(session.getAttribute("xxx") == null){
+            System.out.println("---set---------------")
+            session.setAttribute("xxx", "123123")
+        }
+
+        return session.getAttribute("xxx").toString()
     }
 
 }
