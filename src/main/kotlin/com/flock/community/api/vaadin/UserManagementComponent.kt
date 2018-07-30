@@ -26,7 +26,7 @@ open class UserManagementComponent(private val userRepository: UserRepository) :
         val userGrid = userGrid()
         userGrid.height = "100vh"
         userGrid.asSingleSelect().addValueChangeListener { event ->
-            val user = event.value.let { user ->
+            event.value.let { user ->
                 val userForm = authorityForm(user)
                 val formDialog = formDialog(
                         userForm,
