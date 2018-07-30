@@ -26,7 +26,7 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                 .authorizeRequests()
                 .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**", "/frontend**", "/VAADIN**").permitAll()
                 .antMatchers("/_ah/**").permitAll()
-                .antMatchers("/frontend/**").permitAll()
+                .antMatchers("/frontend/**", "/frontend-es6/**").permitAll()
                 .mvcMatchers("/api/register").permitAll()
                 .antMatchers("/api/buckaroo/**").permitAll()
                 .antMatchers("/api/**", "/ui/**").fullyAuthenticated()
