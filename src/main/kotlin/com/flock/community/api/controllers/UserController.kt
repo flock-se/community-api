@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.rest.webmvc.RepositoryRestController
 import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.context.SecurityContextHolderStrategy
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
@@ -18,6 +20,12 @@ open class UserController(private val userRepository: UserRepository) {
     @PreAuthorize("isAuthenticated()")
     fun findMe(principal: Principal): Principal {
         return principal
+    }
+
+    @GetMapping("/strategy")
+    @PreAuthorize("isAuthenticated()")
+    fun findStrategy(): String? {
+        return SecurityContextHolder.getContextHolderStrategy().javaClass.name
     }
 
     @GetMapping()

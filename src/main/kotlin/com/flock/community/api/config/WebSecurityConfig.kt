@@ -8,9 +8,10 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.Principal
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.builders.WebSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.context.SecurityContextHolder
 
 
 @Configuration
@@ -19,23 +20,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 //@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 open class SecurityConfig() : WebSecurityConfigurerAdapter() {
 
-    override fun configure(web: WebSecurity) {
-        web
-                .ignoring()
-                .antMatchers() // #3
-    }
     override fun configure(http: HttpSecurity) {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**", "/frontend**", "/VAADIN**").permitAll()
-                    .antMatchers("/_ah/**").permitAll()
-                    .antMatchers("/frontend/**").permitAll()
-                    .mvcMatchers("/api/register").permitAll()
-                    .antMatchers("/api/buckaroo/**").permitAll()
-                    .antMatchers("/api/**", "/ui/**").fullyAuthenticated()
+                .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**", "/frontend**", "/VAADIN**").permitAll()
+                .antMatchers("/_ah/**").permitAll()
+                .antMatchers("/frontend/**").permitAll()
+                .mvcMatchers("/api/register").permitAll()
+                .antMatchers("/api/buckaroo/**").permitAll()
+                .antMatchers("/api/**", "/ui/**").fullyAuthenticated()
                 .and()
-                    .csrf().disable();
+                .csrf().disable();
 
     }
 

@@ -6,11 +6,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.security.core.context.SecurityContextHolder
 
 @SpringBootApplication
-class Application : SpringBootServletInitializer() {
-
-}
+class Application : SpringBootServletInitializer()
 
 fun main(args: Array<String>) {
-    SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL)
     SpringApplication.run(Application::class.java, *args)
 }
