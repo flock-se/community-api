@@ -43,10 +43,10 @@ open class UserController(private val userRepository: UserRepository) {
     @PostMapping()
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('UserAuthorities.WRITE')")
-    fun save(@RequestBody user: User, @PathVariable id: Long): User {
+    fun save(@RequestBody user: User, @PathVariable id: Long?): User {
         if (id != null) {
-            val user = user.copy(id)
-            return userRepository.save(user)
+            return userRepository.save(user.copy(
+                    id = id))
         }
         return userRepository.save(user)
     }

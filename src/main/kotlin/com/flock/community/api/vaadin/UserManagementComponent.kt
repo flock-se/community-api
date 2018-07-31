@@ -31,12 +31,11 @@ open class UserManagementComponent(private val userRepository: UserRepository) :
                 val formDialog = formDialog(
                         userForm,
                         {
-                            val user = user.copy(
+                            userRepository.save(user.copy(
                                     authorities = userForm.selectedItems
                                             .map({ it.toName() })
                                             .toList()
-                            )
-                            userRepository.save(user)
+                            ))
                             userGrid.dataProvider.refreshAll()
                         }
 
@@ -126,6 +125,6 @@ open class UserManagementComponent(private val userRepository: UserRepository) :
                     val pageable = PageRequest.of(page, pageSize)
                     userRepository.findAll(pageable).toList().stream()
                 }
-        ) { query -> userRepository.count().toInt() }
+        ) { userRepository.count().toInt() }
     }
 }

@@ -24,9 +24,9 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
 
         http
                 .authorizeRequests()
-                .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**", "/frontend**", "/VAADIN**").permitAll()
+                .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**").permitAll()
                 .antMatchers("/_ah/**").permitAll()
-                .antMatchers("/frontend/**", "/frontend-es6/**").permitAll()
+                .antMatchers( "/frontend**", "/VAADIN**").permitAll()
                 .mvcMatchers("/api/register").permitAll()
                 .antMatchers("/api/buckaroo/**").permitAll()
                 .antMatchers("/api/**", "/ui/**").fullyAuthenticated()
@@ -43,12 +43,11 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
             val user = userRepository.findByReference(reference)
 
             if (user == null) {
-                val user = User(
+                userRepository.save( User(
                         reference = reference,
                         name = it.get("name").toString(),
                         email = it.get("email").toString()
-                )
-                userRepository.save(user)
+                ))
             } else {
                 user
             }

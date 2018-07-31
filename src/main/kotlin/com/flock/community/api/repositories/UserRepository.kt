@@ -7,10 +7,11 @@ import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.security.core.userdetails.UserDetailsService
 
 import org.springframework.stereotype.Service
+import java.io.Serializable
 
 
 @Service
-interface UserRepository : PagingAndSortingRepository<User, Long> {
+interface UserRepository : PagingAndSortingRepository<User, Long>, Serializable {
 
     fun findByReference(name: String): User?
 }
