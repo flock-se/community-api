@@ -16,8 +16,6 @@
         <google.datastore.version>1.28.0</google.datastore.version>
         <google.appengine.version>1.9.64</google.appengine.version>
         <google.store.version>1.28.0</google.store.version>
-        <vaadin.version>10.0.1</vaadin.version>
-        <flow.maven.plugin.version>1.0.2</flow.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -92,16 +90,6 @@
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
 
-        <!-- Vaadin -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring</artifactId>
-        </dependency>
-
         <!-- Databases - Uses HSQL by default -->
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -157,13 +145,6 @@
                 <version>1.1.0.M1</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${vaadin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -223,7 +204,6 @@
                 </configuration>
             </plugin>
 
-            <!-- [START cloudplugin] -->
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
@@ -231,7 +211,7 @@
                 <configuration>
                 </configuration>
             </plugin>
-            <!-- [END cloudplugin] -->
+
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
@@ -262,35 +242,6 @@
                 </plugins>
             </build>
         </profile>
-
-        <profile>
-            <id>production</id>
-
-            <dependencies>
-                <dependency>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>flow-server-production-mode</artifactId>
-                </dependency>
-            </dependencies>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.vaadin</groupId>
-                        <artifactId>flow-maven-plugin</artifactId>
-                        <version>${flow.maven.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>copy-production-files</goal>
-                                    <goal>package-for-production</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 
     <repositories>
@@ -298,14 +249,6 @@
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
-        </repository>
-        <repository>
-            <id>Vaadin prereleases</id>
-            <url>https://maven.vaadin.com/vaadin-prereleases</url>
-        </repository>
-        <repository>
-            <id>Vaadin Directory</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
         </repository>
     </repositories>
 
