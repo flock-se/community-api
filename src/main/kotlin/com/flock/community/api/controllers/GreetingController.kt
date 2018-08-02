@@ -1,5 +1,6 @@
 package com.flock.community.api.controllers
 
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.context.SecurityContext
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,27 +19,7 @@ class GreetingController {
                 "Hello, $name, from a SpringBoot Application written in Kotlin, running on Google App Engine Java8 Standard..."
 
     @GetMapping("/itsme")
+    @PreAuthorize("hasAuthority('XXX')")
     fun itsme(principal: Principal) = principal
-
-
-    @GetMapping("/itscontext")
-    fun itscontext(): SecurityContext {
-        System.out.println("---dd---------------")
-        return SecurityContextHolder.getContext()
-    }
-
-    @GetMapping("/itssession")
-    fun itssession(request:HttpServletRequest): String {
-
-        val session = request.getSession(true)
-
-
-        if(session.getAttribute("xxx") == null){
-            System.out.println("---set---------------")
-            session.setAttribute("xxx", "123123")
-        }
-
-        return session.getAttribute("xxx").toString()
-    }
 
 }
