@@ -31,13 +31,13 @@ open class BuckarooService {
     }
 
     fun getHash(
-        websiteKey: String,
-        secretKey: String,
-        httpMethod: String,
-        nonce: String,
-        timeStamp: String,
-        requestUri: String,
-        content: String
+            websiteKey: String,
+            secretKey: String,
+            httpMethod: String,
+            nonce: String,
+            timeStamp: String,
+            requestUri: String,
+            content: String
     ): String? {
 
         val encodedContent = getEncodedContent(content)
@@ -85,21 +85,21 @@ open class BuckarooService {
     }
 
     fun authHeader(
-        requestUri: String,
-        content: String,
-        httpMethod: String
+            requestUri: String,
+            content: String,
+            httpMethod: String
     ): String {
         val nonce = getNonce()
         val timeStamp = getTimeStamp()
         var url = URLEncoder.encode(requestUri, "UTF-8").toLowerCase()
         return "hmac " + websiteKey + ":" + getHash(
-            websiteKey,
-            secretKey,
-            httpMethod,
-            nonce,
-            timeStamp,
-            url,
-            content
+                websiteKey,
+                secretKey,
+                httpMethod,
+                nonce,
+                timeStamp,
+                url,
+                content
         ) + ":" + nonce + ":" + timeStamp;
     }
 

@@ -33,9 +33,9 @@ open class MemberController(private val memberRepository: MemberRepository) {
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: String, @RequestBody member: Member): Member {
         return memberRepository.save(
-            member.copy(
-                id = id.toLong()
-            )
+                member.copy(
+                        id = id.toLong()
+                )
         )
     }
 
