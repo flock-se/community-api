@@ -22,13 +22,6 @@ open class UserController(private val userRepository: UserRepository) {
         return principal
     }
 
-    @GetMapping("/test")
-    @PreAuthorize("isAuthenticated()")
-    fun test(request: HttpServletRequest): HttpSession? {
-        val session = request.getSession()
-        return session
-    }
-
     @GetMapping("/strategy")
     @PreAuthorize("isAuthenticated()")
     fun findStrategy(): String? {
