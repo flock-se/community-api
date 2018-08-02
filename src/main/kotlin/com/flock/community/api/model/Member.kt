@@ -1,5 +1,6 @@
 package com.flock.community.api.model
 
+import java.io.Serializable
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -28,8 +29,7 @@ data class Member(
 
     val status: Status = Status.NEW
 
-)
-
+): Serializable
 enum class Status {
     NEW,
     ACTIVE,

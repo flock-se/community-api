@@ -3,6 +3,7 @@ package com.flock.community.api.vaadin
 import com.vaadin.flow.component.html.Header
 import com.vaadin.flow.component.tabs.Tab
 import com.vaadin.flow.component.tabs.Tabs
+import java.security.Principal
 
 
 class HeaderComponent : Header() {
@@ -14,7 +15,7 @@ class HeaderComponent : Header() {
         val tabs = Tabs(tab1, tab2)
 
         tabs.addSelectedChangeListener { event ->
-            System.out.println("Hello World")
+            System.out.println("Me: ")
         }
 
         add(tabs)
