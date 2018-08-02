@@ -4,12 +4,12 @@ import com.flock.community.api.model.User
 import com.flock.community.api.repositories.UserRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.data.rest.webmvc.RepositoryRestController
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.context.SecurityContextHolderStrategy
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpSession
 
 
 @RestController
@@ -20,6 +20,13 @@ open class UserController(private val userRepository: UserRepository) {
     @PreAuthorize("isAuthenticated()")
     fun findMe(principal: Principal): Principal {
         return principal
+    }
+
+    @GetMapping("/test")
+    @PreAuthorize("isAuthenticated()")
+    fun test(request: HttpServletRequest): HttpSession? {
+        val session = request.getSession()
+        return session
     }
 
     @GetMapping("/strategy")
