@@ -18,6 +18,9 @@ import javax.crypto.spec.SecretKeySpec
 open class BuckarooService {
 
     data class BuckarooTransaction(
+            val amount: Double,
+            val description: String,
+            val issuer: String,
             val redirectUrl: String,
             val reference: String
     )
@@ -120,12 +123,14 @@ open class BuckarooService {
 
         val entity = HttpEntity(postContent, headers)
 
-
         val res = restTemplate.postForObject("https://" + requestUri, entity, ObjectNode::class.java)
         val redirectUrl = res.get("RequiredAction").get("RedirectURL").asText()
         val reference = res.get("RequiredAction").get("RedirectURL").asText()
 
         return BuckarooTransaction(
+                amount = amount,
+                description = description,
+                issuer = issuer,
                 redirectUrl = redirectUrl,
                 reference = reference
         )

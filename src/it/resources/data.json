@@ -1,0 +1,16 @@
+{
+  "issuer": "INGBNL2A",
+  "amount": "50",
+  "newsletter": true,
+  "agreedOnTerms": true,
+  "member": {
+    "firstName": "Willem",
+    "infix": "van",
+    "surName": "Kersten",
+    "postalCode": "3524RE",
+    "houseNumber": "35",
+    "houseNumberExtension": "a",
+    "email": "willemkersten@gmail.com",
+    "gender": "MALE"
+  }
+}

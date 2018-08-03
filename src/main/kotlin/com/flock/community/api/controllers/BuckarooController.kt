@@ -15,33 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/buckaroo")
 open class BuckarooController(private val buckarooService: BuckarooService, private val transactionRepository: TransactionRepository, private val memberRepository: MemberRepository) {
 
-    data class Donate(
-            val amount: Double,
-            val description: String,
-            val issuer: String,
-
-            val member: Member,
-
-            val newsletter: Boolean,
-            val agreeOnTerms: Boolean
-    )
-
-    @PostMapping("/donate")
-    fun donate(@RequestBody donate: Donate): String {
-
-
-        val buckarooTransaction = buckarooService.createTransaction(donate.amount, "Donate", donate.issuer)
-        val transaction = Transaction(
-                amount = donate.amount,
-                member = memberRepository.save(donate.member),
-                reference = buckarooTransaction.reference
-        )
-
-        transactionRepository.save(transaction)
-
-        return buckarooTransaction.redirectUrl
-    }
-
     @PostMapping("/success")
     fun succes(): String {
         return "OK"

@@ -1,9 +1,6 @@
 package com.flock.community.api.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Transaction(
@@ -12,6 +9,7 @@ data class Transaction(
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long = 0,
 
+        @ManyToOne
         val member: Member,
 
         val amount: Double,

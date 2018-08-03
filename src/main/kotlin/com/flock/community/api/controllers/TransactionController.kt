@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 open class TransactionController(private val userRepository: UserRepository) {
 
     @GetMapping()
-    @PreAuthorize("hasAuthority('UserAuthorities.READ')")
+    @PreAuthorize("hasAuthority('TransactionAuthorities.READ')")
     fun findAll(pageable: Pageable): Page<User> {
         return userRepository.findAll(pageable)
     }
