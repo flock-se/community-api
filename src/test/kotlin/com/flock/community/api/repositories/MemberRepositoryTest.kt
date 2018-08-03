@@ -26,19 +26,22 @@ open class MemberRepositoryTest {
     @PostConstruct
     fun init() {
         memberRepository.save(Member(
-            name = "member1",
-            email = "member1@gmail.com",
-            status = Status.ACTIVE
+                firstName = "member1",
+                surName = "member1",
+                email = "member1@gmail.com",
+                status = Status.ACTIVE
         ))
         memberRepository.save(Member(
-            name = "member2",
-            email = "member2@gmail.com",
-            status = Status.ACTIVE
+                firstName = "member2",
+                surName = "member2",
+                email = "member2@gmail.com",
+                status = Status.ACTIVE
         ))
         memberRepository.save(Member(
-            name = "member3",
-            email = "member3@gmail.com",
-            status = Status.ACTIVE
+                firstName = "member3",
+                surName = "member3",
+                email = "member3@gmail.com",
+                status = Status.ACTIVE
         ))
     }
 
@@ -50,20 +53,21 @@ open class MemberRepositoryTest {
 
     @Test
     fun testsFindByIds() {
-        val res = memberRepository.findByIds(listOf(1,2))
-        assertEquals("member1", res[0].name)
-        assertEquals("member2", res[1].name)
+        val res = memberRepository.findByIds(listOf(1, 2))
+        assertEquals("member1", res[0].firstName)
+        assertEquals("member2", res[1].firstName)
     }
 
     @Test
     fun testsCreate() {
         val member = Member(
-            name = "Willem Veelenturf",
-            email = "willem.veelenturf@gmail.com"
+                firstName = "Willem",
+                surName = "Veelenturf",
+                email = "willem.veelenturf@gmail.com"
         )
         val res = memberRepository.save(member)
 
-        assertEquals("Willem Veelenturf", res.name)
+        assertEquals("Willem", res.firstName)
     }
 
 

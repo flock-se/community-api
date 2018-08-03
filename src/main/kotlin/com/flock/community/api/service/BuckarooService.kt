@@ -17,6 +17,11 @@ import javax.crypto.spec.SecretKeySpec
 @Service
 open class BuckarooService {
 
+    data class BuckarooTransaction(
+            val redirectUrl: String,
+            val reference: String
+    )
+
     @Value("\${buckaroo.websiteKey}")
     private var websiteKey: String = ""
 
@@ -103,7 +108,7 @@ open class BuckarooService {
         ) + ":" + nonce + ":" + timeStamp;
     }
 
-    fun createTransaction(amount: Double, description: String, issuer: String): String {
+    fun createTransaction(amount: Double, description: String, issuer: String): BuckarooTransaction {
         val requestUri = "testcheckout.buckaroo.nl/json/transaction"
         val postContent = getContent(amount, description, issuer)
         val httpMethod = "POST"
@@ -114,8 +119,16 @@ open class BuckarooService {
         headers.set("Content-Type", "application/json")
 
         val entity = HttpEntity(postContent, headers)
+
+
         val res = restTemplate.postForObject("https://" + requestUri, entity, ObjectNode::class.java)
-        return res.get("RequiredAction").get("RedirectURL").asText()
+        val redirectUrl = res.get("RequiredAction").get("RedirectURL").asText()
+        val reference = res.get("RequiredAction").get("RedirectURL").asText()
+
+        return BuckarooTransaction(
+                redirectUrl = redirectUrl,
+                reference = reference
+        )
 
     }
 }

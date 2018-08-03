@@ -15,7 +15,9 @@ open class RegisterController(private val memberRepository: MemberRepository) {
 
     @PostMapping()
     fun create(@RequestBody member: Member): Member {
-        return memberRepository.save(member.copy(status = Status.NEW))
+        return memberRepository.save(
+                member.copy(status = Status.NEW)
+        )
     }
 
 }

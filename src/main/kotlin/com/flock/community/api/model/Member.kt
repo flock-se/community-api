@@ -14,13 +14,17 @@ data class Member(
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long = 0,
 
-        val name: String,
+        val firstName: String,
+        val infix: String? = null,
+        val surName: String,
+
         val email: String,
 
         val phoneNumber: String? = null,
 
         val street: String? = null,
         val houseNumber: String? = null,
+        val houseNumberExtension: String? = null,
         val postalCode: String? = null,
         val place: String? = null,
 
@@ -40,5 +44,5 @@ enum class Status {
 enum class Gender {
     MALE,
     FEMALE,
-    UNKNOWN
+    OTHER
 }

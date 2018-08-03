@@ -12,9 +12,10 @@ data class Transaction(
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long = 0,
 
-        val user: Member,
+        val member: Member,
 
-        val amount: Int,
-        val confirmed: Boolean
+        val amount: Double,
+        val reference: String,
+        val confirmed: Boolean = false
 
 )
