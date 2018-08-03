@@ -10,6 +10,7 @@ data class User(
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long = 0,
 
+        @Column(unique = true)
         val reference: String,
 
         val name: String,

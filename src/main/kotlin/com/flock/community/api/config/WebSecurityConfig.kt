@@ -1,5 +1,6 @@
 package com.flock.community.api.config
 
+import com.flock.community.api.authorities.UserAuthorities
 import com.flock.community.api.model.User
 import com.flock.community.api.repositories.UserRepository
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
@@ -25,9 +26,8 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                 .authorizeRequests()
                 .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**").permitAll()
                 .antMatchers("/_ah/**").permitAll()
-                .antMatchers("/frontend**", "/VAADIN**").permitAll()
                 .mvcMatchers("/api/register").permitAll()
-                .antMatchers("/api/buckaroo/**").permitAll()
+                .antMatchers("/api/buckaroo**", "/api/donate**").permitAll()
                 .antMatchers("/api/**", "/ui/**").fullyAuthenticated()
                 .and()
                 .csrf().disable();
@@ -45,7 +45,11 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                 userRepository.save(User(
                         reference = reference,
                         name = it.get("name").toString(),
-                        email = it.get("email").toString()
+                        email = it.get("email").toString(),
+                        authorities = listOf(
+                                UserAuthorities.READ.toName(),
+                                UserAuthorities.WRITE.toName()
+                        )
                 ))
             } else {
                 user

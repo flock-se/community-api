@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-@RequestMapping("/donate")
+@RequestMapping("/api/donate")
 open class DonateController(private val buckarooService: BuckarooService, private val transactionRepository: TransactionRepository, private val memberRepository: MemberRepository) {
 
     data class Donate(
