@@ -3,6 +3,7 @@ package com.flock.community.api.repositories
 import com.flock.community.api.model.Member
 import com.flock.community.api.model.Status
 import junit.framework.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -51,6 +52,7 @@ open class MemberRepositoryTest {
         assertEquals(Optional.empty<Member>(), res)
     }
 
+    @Ignore
     @Test
     fun testsFindByIds() {
         val res = memberRepository.findByIds(listOf(1, 2))

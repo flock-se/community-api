@@ -2,6 +2,7 @@ package com.flock.community.api.controllers
 
 import com.flock.community.api.model.User
 import com.flock.community.api.repositories.UserRepository
+import com.flock.community.api.service.MailService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.security.access.prepost.PreAuthorize
@@ -18,6 +19,13 @@ open class UserController(private val userRepository: UserRepository) {
     @PreAuthorize("isAuthenticated()")
     fun findMe(principal: Principal): Principal {
         return principal
+    }
+
+    @GetMapping("/me/mail")
+    @PreAuthorize("isAuthenticated()")
+    fun mailMe(mailService: MailService, principal: Principal): String {
+        mailService.sendMail(principal)
+        return "mail sent"
     }
 
     @GetMapping("/strategy")
