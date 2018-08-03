@@ -1,6 +1,9 @@
 package com.flock.community.api.config
 
+import com.flock.community.api.authorities.MemberAuthorities
+import com.flock.community.api.authorities.TransactionAuthorities
 import com.flock.community.api.authorities.UserAuthorities
+import com.flock.community.api.model.Transaction
 import com.flock.community.api.model.User
 import com.flock.community.api.repositories.UserRepository
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
@@ -48,7 +51,11 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                         email = it.get("email").toString(),
                         authorities = listOf(
                                 UserAuthorities.READ.toName(),
-                                UserAuthorities.WRITE.toName()
+                                UserAuthorities.WRITE.toName(),
+                                TransactionAuthorities.READ.toName(),
+                                TransactionAuthorities.WRITE.toName(),
+                                MemberAuthorities.READ.toName(),
+                                MemberAuthorities.WRITE.toName()
                         )
                 ))
             } else {
