@@ -1,6 +1,7 @@
 package com.flock.community.api.service
 
 import com.flock.community.api.model.User
+import org.springframework.security.oauth2.provider.OAuth2Authentication
 import org.springframework.stereotype.Service
 import java.io.UnsupportedEncodingException
 import java.security.Principal
@@ -21,7 +22,7 @@ open class MailService {
 
     fun sendMail(principal: Principal) {
 
-        val user: User = principal as User;
+        val user: User = (principal as OAuth2Authentication).principal as User;
 
         try {
             val msg: Message = MimeMessage(session)
