@@ -26,7 +26,7 @@ data class Member(
         val houseNumber: String? = null,
         val houseNumberExtension: String? = null,
         val postalCode: String? = null,
-        val place: String? = null,
+        val city: String? = null,
 
         val gender: Gender? = null,
         val birthDate: Date? = null,
