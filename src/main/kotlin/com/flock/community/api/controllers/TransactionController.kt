@@ -1,6 +1,8 @@
 package com.flock.community.api.controllers
 
+import com.flock.community.api.model.Transaction
 import com.flock.community.api.model.User
+import com.flock.community.api.repositories.TransactionRepository
 import com.flock.community.api.repositories.UserRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -12,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/transactions")
-open class TransactionController(private val userRepository: UserRepository) {
+open class TransactionController(private val transactionRepository: TransactionRepository) {
 
     @GetMapping()
     @PreAuthorize("hasAuthority('TransactionAuthorities.READ')")
-    fun findAll(pageable: Pageable): Page<User> {
-        return userRepository.findAll(pageable)
+    fun findAll(pageable: Pageable): Page<Transaction> {
+        return transactionRepository.findAll(pageable)
     }
 
 }

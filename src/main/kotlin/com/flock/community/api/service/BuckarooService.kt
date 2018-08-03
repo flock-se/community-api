@@ -124,8 +124,9 @@ open class BuckarooService {
         val entity = HttpEntity(postContent, headers)
 
         val res = restTemplate.postForObject("https://" + requestUri, entity, ObjectNode::class.java)
+
+        val reference = res.get("Key").asText()
         val redirectUrl = res.get("RequiredAction").get("RedirectURL").asText()
-        val reference = res.get("RequiredAction").get("RedirectURL").asText()
 
         return BuckarooTransaction(
                 amount = amount,
