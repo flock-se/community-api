@@ -10,11 +10,9 @@ import java.security.Principal
 class GreetingController {
 
     @GetMapping("/greeting")
-    fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String) =
-            "Hello, $name, from a SpringBoot Application written in Kotlin, running on Google App Engine Java8 Standard..."
+    fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String) = "Hello, $name"
 
     @GetMapping("/itsme")
-    @PreAuthorize("hasAuthority('XXX')")
-    fun itsme(principal: Principal) = principal
+    fun itsme(principal: Principal) = "Hello, ${principal.name}"
 
 }

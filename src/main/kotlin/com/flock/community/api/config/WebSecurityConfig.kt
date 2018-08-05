@@ -29,11 +29,10 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                 .authorizeRequests()
                 .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**").permitAll()
                 .antMatchers("/_ah/**").permitAll()
-                .mvcMatchers("/api/register").permitAll()
-                .antMatchers("/api/buckaroo**", "/api/donate**").permitAll()
-                .antMatchers("/api/**", "/ui/**").fullyAuthenticated()
+                .antMatchers("/api/buckaroo**", "/api/donate**", "/api/register**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .csrf().disable();
+                .csrf().disable()
 
     }
 
