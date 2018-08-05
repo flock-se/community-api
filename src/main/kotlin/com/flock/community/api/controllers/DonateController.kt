@@ -28,7 +28,7 @@ open class DonateController(
             val amount: Double,
             val issuer: String,
 
-            val member: Member,
+            val member: Member? = null,
 
             val newsletter: Boolean,
             val agreeOnTerms: Boolean
@@ -45,7 +45,10 @@ open class DonateController(
         )
 
         transactionRepository.save(transaction)
-        memberRepository.save(donate.member)
+
+        if (donate.member != null) {
+            memberRepository.save(donate.member)
+        }
 
         val donation = Donation(
                 date = Date(),

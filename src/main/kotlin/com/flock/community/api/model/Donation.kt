@@ -15,7 +15,7 @@ data class Donation(
         val frequency: Frequency,
 
         @ManyToOne
-        val member: Member,
+        val member: Member?,
 
         @OneToMany(fetch=FetchType.EAGER)
         val transactions: List<Transaction>

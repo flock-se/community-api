@@ -75,4 +75,24 @@ class DonateIT {
 
     }
 
+    @Test
+    fun donationAnoniem() {
+
+        val donate = DonateController.Donate(
+                amount = 10.00,
+                issuer = "INGBNL2A",
+                agreeOnTerms = true,
+                newsletter = true
+        )
+
+        mockMvc.perform(post("/api/donate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsBytes(donate)))
+                .andDo(print())
+                .andExpect(status().isOk())
+
+
+
+    }
+
 }
