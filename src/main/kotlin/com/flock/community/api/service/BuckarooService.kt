@@ -31,86 +31,6 @@ open class BuckarooService {
     @Value("\${buckaroo.secretKey}")
     private var secretKey: String = ""
 
-    fun getEncodedContent(content: String): String {
-        val md = MessageDigest.getInstance("MD5")
-        val md5 = md.digest(content.toByteArray())
-        val base64 = getEncoder().encodeToString(md5)
-        return base64
-    }
-
-    fun getHash(
-            websiteKey: String,
-            secretKey: String,
-            httpMethod: String,
-            nonce: String,
-            timeStamp: String,
-            requestUri: String,
-            content: String
-    ): String? {
-
-        val encodedContent = getEncodedContent(content)
-        val rawData = websiteKey + httpMethod + requestUri + timeStamp + nonce + encodedContent
-
-        val sha256HMAC = Mac.getInstance("HmacSHA256")
-        val secretkey = SecretKeySpec(secretKey.toByteArray(), "HmacSHA256")
-        sha256HMAC.init(secretkey)
-        return getEncoder().encodeToString(sha256HMAC.doFinal(rawData.toByteArray()))
-
-    }
-
-    fun getTimeStamp(): String {
-        return (Date().getTime() / 1000).toString()
-    }
-
-    fun getNonce(): String {
-        return RandomStringUtils.randomAlphanumeric(32)
-    }
-
-    fun getContent(amount: Double, description: String, issuer: String): String {
-        return """{
-            "Currency": "EUR",
-            "AmountDebit": $amount,
-            "Invoice": "$description",
-            "ClientIP": {
-            "Type": 0,
-            "Address": "0.0.0.0"
-        },
-            "Services": {
-            "ServiceList": [
-            {
-                "Name": "ideal",
-                "Action": "Pay",
-                "Parameters": [
-                {
-                    "Name": "issuer",
-                    "Value": "$issuer"
-                }
-                ]
-            }
-            ]
-        }
-        """
-    }
-
-    fun authHeader(
-            requestUri: String,
-            content: String,
-            httpMethod: String
-    ): String {
-        val nonce = getNonce()
-        val timeStamp = getTimeStamp()
-        var url = URLEncoder.encode(requestUri, "UTF-8").toLowerCase()
-        return "hmac " + websiteKey + ":" + getHash(
-                websiteKey,
-                secretKey,
-                httpMethod,
-                nonce,
-                timeStamp,
-                url,
-                content
-        ) + ":" + nonce + ":" + timeStamp;
-    }
-
     fun createTransaction(amount: Double, description: String, issuer: String): BuckarooTransaction {
         val requestUri = "testcheckout.buckaroo.nl/json/transaction"
         val postContent = getContent(amount, description, issuer)
@@ -137,4 +57,86 @@ open class BuckarooService {
         )
 
     }
+
+    private fun getEncodedContent(content: String): String {
+        val md = MessageDigest.getInstance("MD5")
+        val md5 = md.digest(content.toByteArray())
+        val base64 = getEncoder().encodeToString(md5)
+        return base64
+    }
+
+    private fun getHash(
+            websiteKey: String,
+            secretKey: String,
+            httpMethod: String,
+            nonce: String,
+            timeStamp: String,
+            requestUri: String,
+            content: String
+    ): String? {
+
+        val encodedContent = getEncodedContent(content)
+        val rawData = websiteKey + httpMethod + requestUri + timeStamp + nonce + encodedContent
+
+        val sha256HMAC = Mac.getInstance("HmacSHA256")
+        val secretkey = SecretKeySpec(secretKey.toByteArray(), "HmacSHA256")
+        sha256HMAC.init(secretkey)
+        return getEncoder().encodeToString(sha256HMAC.doFinal(rawData.toByteArray()))
+
+    }
+
+    private fun getTimeStamp(): String {
+        return (Date().getTime() / 1000).toString()
+    }
+
+    private fun getNonce(): String {
+        return RandomStringUtils.randomAlphanumeric(32)
+    }
+
+    private fun getContent(amount: Double, description: String, issuer: String): String {
+        return """{
+            "Currency": "EUR",
+            "AmountDebit": $amount,
+            "Invoice": "$description",
+            "ClientIP": {
+            "Type": 0,
+            "Address": "0.0.0.0"
+        },
+            "Services": {
+            "ServiceList": [
+            {
+                "Name": "ideal",
+                "Action": "Pay",
+                "Parameters": [
+                {
+                    "Name": "issuer",
+                    "Value": "$issuer"
+                }
+                ]
+            }
+            ]
+        }
+        """
+    }
+
+    private fun authHeader(
+            requestUri: String,
+            content: String,
+            httpMethod: String
+    ): String {
+        val nonce = getNonce()
+        val timeStamp = getTimeStamp()
+        var url = URLEncoder.encode(requestUri, "UTF-8").toLowerCase()
+        return "hmac " + websiteKey + ":" + getHash(
+                websiteKey,
+                secretKey,
+                httpMethod,
+                nonce,
+                timeStamp,
+                url,
+                content
+        ) + ":" + nonce + ":" + timeStamp;
+    }
+
+
 }

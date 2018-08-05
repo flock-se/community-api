@@ -17,32 +17,10 @@ import org.springframework.web.client.RestTemplate
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @Import(BuckarooService::class)
-@Ignore
 open class BuckarooServiceTest {
 
     @Autowired
     lateinit var buckarooService: BuckarooService
-
-    @Test
-    fun generateHeader() {
-        val requestUri = "testcheckout.buckaroo.nl/json/transaction"
-        val postContent = buckarooService.getContent(10.00, "test test", "INGBNL2A")
-        val httpMethod = "POST"
-        val res = buckarooService.authHeader(requestUri, postContent, httpMethod)
-        System.out.println("-------------" + res)
-    }
-
-    @Test
-    fun getTimeStamp() {
-        val res = buckarooService.getTimeStamp()
-        System.out.println(res)
-    }
-
-    @Test
-    fun getNonce() {
-        val res = buckarooService.getNonce()
-        System.out.println(res)
-    }
 
     @Test
     fun createTransaction() {

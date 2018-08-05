@@ -16,6 +16,8 @@ interface MemberRepository : CrudRepository<Member, Long> {
     @Query("SELECT m FROM Member m WHERE m.firstName LIKE ?1 OR m.surName LIKE ?1")
     fun findByName(name: String): List<Member>
 
+    fun findByEmail(email: String): List<Member>
+
 }
 
 
