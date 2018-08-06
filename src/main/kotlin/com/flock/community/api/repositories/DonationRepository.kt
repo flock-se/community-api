@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service
 interface DonationRepository : PagingAndSortingRepository<Donation, Long> {
 
     @Query("SELECT d FROM Donation d " +
-            "INNER JOIN FETCH d.member m " +
-            "INNER JOIN FETCH m.groups g " +
-            "INNER JOIN FETCH d.transactions t " +
+            "LEFT JOIN FETCH d.member m " +
+            "LEFT JOIN FETCH m.groups g " +
+            "LEFT JOIN FETCH d.transactions t " +
             "WHERE d.member.id = ?1")
     fun findByMemberId(id: Long): List<Donation>
 }

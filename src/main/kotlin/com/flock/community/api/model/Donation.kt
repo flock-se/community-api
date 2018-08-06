@@ -14,7 +14,7 @@ data class Donation(
         val amount: Double,
         val frequency: Frequency,
 
-        @ManyToOne(cascade = [(CascadeType.ALL)])
+        @ManyToOne(cascade = [CascadeType.ALL])
         val member: Member?,
 
         @OneToMany(cascade = [CascadeType.ALL])

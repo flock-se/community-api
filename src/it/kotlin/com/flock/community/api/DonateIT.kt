@@ -46,16 +46,10 @@ class DonateIT {
 
         val email = UUID.randomUUID().toString();
 
-        val group = MemberGroup(
-                code = "TEST",
-                name = "Test"
-        )
-
         val member = Member(
                 firstName = "DonateFirstName",
                 surName = "DonateSurName",
-                email = email,
-                groups = setOf(group)
+                email = email
         )
 
         val donate = DonateController.Donate(
