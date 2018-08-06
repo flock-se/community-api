@@ -17,6 +17,6 @@ data class User(
         val email: String,
 
         @ElementCollection(fetch = FetchType.EAGER)
-        val authorities: List<String> = listOf()
+        val authorities: Set<String> = setOf()
 
 ):Serializable

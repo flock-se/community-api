@@ -19,8 +19,6 @@ import java.util.*
 @RequestMapping("/api/donate")
 open class DonateController(
         private val buckarooService: BuckarooService,
-        private val transactionRepository: TransactionRepository,
-        private val memberRepository: MemberRepository,
         private val donationRepository: DonationRepository) {
 
     data class Donate(
@@ -44,18 +42,12 @@ open class DonateController(
                 reference = buckarooTransaction.reference
         )
 
-        if (donate.member != null) {
-            memberRepository.save(donate.member)
-        }
-
-        transactionRepository.save(transaction)
-
         val donation = Donation(
                 date = Date(),
                 amount = donate.amount,
                 frequency = Frequency.ONCE,
                 member = donate.member,
-                transactions = listOf(transaction)
+                transactions = setOf(transaction)
         )
 
         donationRepository.save(donation)

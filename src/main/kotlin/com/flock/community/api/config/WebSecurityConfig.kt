@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.Authoriti
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -28,7 +29,9 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                 .authorizeRequests()
                 .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**").permitAll()
                 .antMatchers("/_ah/**").permitAll()
-                .antMatchers("/api/buckaroo**", "/api/donate**", "/api/register**").permitAll()
+                .antMatchers( HttpMethod.POST,"/api/donate", "/api/register").permitAll()
+                .antMatchers( HttpMethod.POST,"/api/donate", "/api/register").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/buckaroo/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
@@ -47,7 +50,7 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                         reference = reference,
                         name = it.get("name").toString(),
                         email = it.get("email").toString(),
-                        authorities = listOf(
+                        authorities = setOf(
                                 UserAuthorities.READ.toName(),
                                 UserAuthorities.WRITE.toName(),
                                 TransactionAuthorities.READ.toName(),

@@ -39,7 +39,7 @@ open class DonationRepositoryTest {
                 firstName = "DonateFirstName",
                 surName = "DonateSurName",
                 email = email,
-                groups = listOf(group)
+                groups = setOf(group)
         )
 
         val transaction = Transaction(
@@ -51,7 +51,7 @@ open class DonationRepositoryTest {
                 date = Date(),
                 amount = 10.00,
                 member = member,
-                transactions = listOf(transaction),
+                transactions = setOf(transaction),
                 frequency = Frequency.ONCE
         )
 
@@ -59,7 +59,7 @@ open class DonationRepositoryTest {
 
         val res = donationRepository.findByMemberId(donation.member!!.id).first()
 
-        assertEquals("TEST", res.member!!.groups[0].code)
+        assertEquals("TEST", res.member!!.groups.toList()[0].code)
     }
 
 }

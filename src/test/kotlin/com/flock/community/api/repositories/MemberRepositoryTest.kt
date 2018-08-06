@@ -84,23 +84,23 @@ open class MemberRepositoryTest {
                 firstName = "Willem",
                 surName = "Veelenturf",
                 email = "willem.veelenturf@gmail.com1",
-                groups = listOf(group)
+                groups = setOf(group)
         )
         val res1 = memberRepository.save(member1)
 
         assertEquals("Willem", res1.firstName)
-        assertEquals("LEKSTREEK", res1.groups[0].code)
+        assertEquals("LEKSTREEK", res1.groups.toList()[0].code)
 
         val member2 = Member(
                 firstName = "Willem",
                 surName = "Veelenturf",
                 email = "willem.veelenturf@gmail.com2",
-                groups = listOf(group)
+                groups = setOf(group)
         )
         val res2 = memberRepository.save(member2)
 
         assertEquals("Willem", res2.firstName)
-        assertEquals("LEKSTREEK", res2.groups[0].code)
+        assertEquals("LEKSTREEK", res2.groups.toList()[0].code)
 
 
     }

@@ -55,7 +55,7 @@ class DonateIT {
                 firstName = "DonateFirstName",
                 surName = "DonateSurName",
                 email = email,
-                groups = listOf(group)
+                groups = setOf(group)
         )
 
         val donate = DonateController.Donate(
@@ -74,11 +74,23 @@ class DonateIT {
 
         val memberRes = memberRepository.findByEmail(email).first()
         val donationList = donationRepository.findByMemberId(memberRes.id)
-        val donationItem = donationRepository.findById(donationList.first().id)
 
         assertEquals(email, memberRes.email)
-        //assertEquals(memberRes, donationList.first().member)
-        //assertEquals(1, donationItem.get().transactions.size)
+        assertEquals(10.0, donationList.first().amount, 0.0)
+        assertEquals(null, donationList.first().transactions.toList()[0].confirmed)
+
+        // Confirm Transcation
+        mockMvc.perform(post("/api/buckaroo/success")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"Transaction\": {\"Key\": \"${donationList.first().transactions.first().reference}\"}}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+
+
+        val donationListConfirmed = donationRepository.findByMemberId(memberRes.id)
+
+        assertEquals(email, memberRes.email)
+        assertEquals(10.0, donationListConfirmed.first().transactions.toList()[0].confirmed)
 
     }
 
