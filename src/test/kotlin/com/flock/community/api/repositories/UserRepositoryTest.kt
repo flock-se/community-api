@@ -1,6 +1,7 @@
 package com.flock.community.api.repositories
 
 import com.flock.community.api.model.Member
+import com.flock.community.api.model.MemberGroup
 import com.flock.community.api.model.Status
 import com.flock.community.api.model.User
 import junit.framework.Assert.assertEquals

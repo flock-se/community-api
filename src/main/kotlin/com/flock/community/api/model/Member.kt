@@ -1,11 +1,7 @@
 package com.flock.community.api.model
 
-import java.io.Serializable
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Member(
@@ -31,9 +27,20 @@ data class Member(
         val gender: Gender? = null,
         val birthDate: Date? = null,
 
+        @ManyToMany(cascade = [(CascadeType.ALL)])
+        val groups: List<MemberGroup> = listOf(),
+
         val status: Status = Status.NEW
 
-) : Serializable
+)
+
+@Entity
+data class MemberGroup(
+
+        @Id
+        val code: String,
+        val name: String
+)
 
 enum class Status {
     NEW,
@@ -46,3 +53,4 @@ enum class Gender {
     FEMALE,
     OTHER
 }
+

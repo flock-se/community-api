@@ -1,6 +1,7 @@
 package com.flock.community.api.repositories
 
 import com.flock.community.api.model.Member
+import com.flock.community.api.model.MemberGroup
 import com.flock.community.api.model.Status
 import junit.framework.Assert.assertEquals
 import org.junit.Test
@@ -68,6 +69,38 @@ open class MemberRepositoryTest {
         val res = memberRepository.save(member)
 
         assertEquals("Willem", res.firstName)
+    }
+
+    @Test
+    fun testsGroup() {
+
+        val group = MemberGroup(
+                code = "LEKSTREEK",
+                name = "Lekstreek"
+        )
+        val member1 = Member(
+                firstName = "Willem",
+                surName = "Veelenturf",
+                email = "willem.veelenturf@gmail.com1",
+                groups = listOf(group)
+        )
+        val res1 = memberRepository.save(member1)
+
+        assertEquals("Willem", res1.firstName)
+        assertEquals("LEKSTREEK", res1.groups[0].code)
+
+        val member2 = Member(
+                firstName = "Willem",
+                surName = "Veelenturf",
+                email = "willem.veelenturf@gmail.com2",
+                groups = listOf(group)
+        )
+        val res2 = memberRepository.save(member2)
+
+        assertEquals("Willem", res2.firstName)
+        assertEquals("LEKSTREEK", res2.groups[0].code)
+
+
     }
 
 

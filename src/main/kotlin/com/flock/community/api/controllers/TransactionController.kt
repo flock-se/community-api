@@ -1,9 +1,7 @@
 package com.flock.community.api.controllers
 
 import com.flock.community.api.model.Transaction
-import com.flock.community.api.model.User
 import com.flock.community.api.repositories.TransactionRepository
-import com.flock.community.api.repositories.UserRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.security.access.prepost.PreAuthorize

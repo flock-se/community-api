@@ -44,11 +44,11 @@ open class DonateController(
                 reference = buckarooTransaction.reference
         )
 
-        transactionRepository.save(transaction)
-
         if (donate.member != null) {
             memberRepository.save(donate.member)
         }
+
+        transactionRepository.save(transaction)
 
         val donation = Donation(
                 date = Date(),

@@ -37,8 +37,7 @@ open class MailService {
             println(e)
         } catch (e: UnsupportedEncodingException) {
             println(e)
-        }
-        finally {
+        } finally {
 
         }
     }
