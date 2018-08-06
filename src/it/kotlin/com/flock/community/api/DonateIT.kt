@@ -8,7 +8,7 @@ import com.flock.community.api.model.MemberGroup
 import com.flock.community.api.repositories.DonationRepository
 import com.flock.community.api.repositories.MemberRepository
 import com.flock.community.api.repositories.TransactionRepository
-import org.junit.Assert.assertEquals
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -77,7 +77,7 @@ class DonateIT {
 
         assertEquals(email, memberRes.email)
         assertEquals(10.0, donationList.first().amount, 0.0)
-        assertEquals(null, donationList.first().transactions.toList()[0].confirmed)
+        assertNull( donationList.first().transactions.toList()[0].confirmed)
 
         // Confirm Transcation
         mockMvc.perform(post("/api/buckaroo/success")
@@ -88,9 +88,8 @@ class DonateIT {
 
 
         val donationListConfirmed = donationRepository.findByMemberId(memberRes.id)
-
         assertEquals(email, memberRes.email)
-        assertEquals(10.0, donationListConfirmed.first().transactions.toList()[0].confirmed)
+        assertNotNull(donationListConfirmed.first().transactions.toList()[0].confirmed)
 
     }
 

@@ -27,7 +27,7 @@ data class Member(
         val gender: Gender? = null,
         val birthDate: Date? = null,
 
-        @ManyToMany(cascade = [(CascadeType.ALL)])
+        @OneToMany(cascade = [CascadeType.ALL])
         val groups: Set<MemberGroup> = setOf(),
 
         val status: Status = Status.NEW

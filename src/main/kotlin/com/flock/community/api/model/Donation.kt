@@ -17,7 +17,7 @@ data class Donation(
         @ManyToOne(cascade = [(CascadeType.ALL)])
         val member: Member?,
 
-        @ManyToMany(cascade = [(CascadeType.ALL)])
+        @OneToMany(cascade = [CascadeType.ALL])
         val transactions: Set<Transaction>
 
 )
