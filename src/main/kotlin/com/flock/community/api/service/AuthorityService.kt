@@ -1,18 +1,18 @@
 package com.flock.community.api.service
 
-import com.flock.community.api.authorities.Authority
-import com.flock.community.api.authorities.MemberAuthorities
-import com.flock.community.api.authorities.TransactionAuthorities
-import com.flock.community.api.authorities.UserAuthorities
+import com.flock.community.api.authorities.TransactionAuthority
+import community.flock.eco.core.authorities.Authority
+import community.flock.eco.feature.members.authorities.MemberAuthority
+import community.flock.eco.feature.users.authorities.UserAuthority
 import org.springframework.stereotype.Service
 
 @Service
 open class AuthorityService {
     fun findAll(): List<String> {
         val list = arrayOf(
-                MemberAuthorities.values(),
-                TransactionAuthorities.values(),
-                UserAuthorities.values()
+                MemberAuthority.values(),
+                TransactionAuthority.values(),
+                UserAuthority.values()
         )
 
         return list

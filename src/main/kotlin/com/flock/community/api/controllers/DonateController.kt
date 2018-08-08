@@ -2,12 +2,10 @@ package com.flock.community.api.controllers
 
 import com.flock.community.api.model.Donation
 import com.flock.community.api.model.Frequency
-import com.flock.community.api.model.Member
 import com.flock.community.api.model.Transaction
 import com.flock.community.api.repositories.DonationRepository
-import com.flock.community.api.repositories.MemberRepository
-import com.flock.community.api.repositories.TransactionRepository
 import com.flock.community.api.service.BuckarooService
+import community.flock.eco.feature.members.model.Member
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

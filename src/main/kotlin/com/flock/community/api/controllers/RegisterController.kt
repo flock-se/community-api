@@ -1,8 +1,8 @@
 package com.flock.community.api.controllers
 
-import com.flock.community.api.model.Member
-import com.flock.community.api.model.Status
-import com.flock.community.api.repositories.MemberRepository
+import community.flock.eco.feature.members.model.Member
+import community.flock.eco.feature.members.model.MemberStatus
+import community.flock.eco.feature.members.repositories.MemberRepository
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,7 +16,7 @@ open class RegisterController(private val memberRepository: MemberRepository) {
     @PostMapping()
     fun create(@RequestBody member: Member): Member {
         return memberRepository.save(
-                member.copy(status = Status.NEW)
+                member.copy(status = MemberStatus.NEW)
         )
     }
 

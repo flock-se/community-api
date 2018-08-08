@@ -3,11 +3,10 @@ package com.flock.community.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.flock.community.api.controllers.DonateController
-import com.flock.community.api.model.Member
-import com.flock.community.api.model.MemberGroup
 import com.flock.community.api.repositories.DonationRepository
-import com.flock.community.api.repositories.MemberRepository
 import com.flock.community.api.repositories.TransactionRepository
+import community.flock.eco.feature.members.model.Member
+import community.flock.eco.feature.members.repositories.MemberRepository
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

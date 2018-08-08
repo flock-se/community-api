@@ -1,10 +1,10 @@
 package com.flock.community.api.config
 
-import com.flock.community.api.authorities.MemberAuthorities
-import com.flock.community.api.authorities.TransactionAuthorities
-import com.flock.community.api.authorities.UserAuthorities
-import com.flock.community.api.model.User
-import com.flock.community.api.repositories.UserRepository
+import com.flock.community.api.authorities.TransactionAuthority
+import community.flock.eco.feature.members.authorities.MemberAuthority
+import community.flock.eco.feature.users.authorities.UserAuthority
+import community.flock.eco.feature.users.model.User
+import community.flock.eco.feature.users.repositories.UserRepository
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor
@@ -19,7 +19,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 
 @Configuration
 @EnableOAuth2Sso
-//@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 open class SecurityConfig() : WebSecurityConfigurerAdapter() {
 
@@ -51,12 +50,12 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                         name = it.get("name").toString(),
                         email = it.get("email").toString(),
                         authorities = setOf(
-                                UserAuthorities.READ.toName(),
-                                UserAuthorities.WRITE.toName(),
-                                TransactionAuthorities.READ.toName(),
-                                TransactionAuthorities.WRITE.toName(),
-                                MemberAuthorities.READ.toName(),
-                                MemberAuthorities.WRITE.toName()
+                                UserAuthority.READ.toName(),
+                                UserAuthority.WRITE.toName(),
+                                TransactionAuthority.READ.toName(),
+                                TransactionAuthority.WRITE.toName(),
+                                MemberAuthority.READ.toName(),
+                                MemberAuthority.WRITE.toName()
                         )
                 ))
             } else {

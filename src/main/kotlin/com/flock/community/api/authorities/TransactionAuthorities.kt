@@ -1,6 +1,8 @@
 package com.flock.community.api.authorities
 
-enum class TransactionAuthorities : Authority {
+import community.flock.eco.core.authorities.Authority
+
+enum class TransactionAuthority: Authority {
     READ,
     WRITE
 }

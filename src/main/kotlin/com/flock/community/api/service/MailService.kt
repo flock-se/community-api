@@ -1,6 +1,7 @@
 package com.flock.community.api.service
 
-import com.flock.community.api.model.User
+import community.flock.eco.core.services.MailService
+import community.flock.eco.feature.users.model.User
 import org.springframework.security.oauth2.provider.OAuth2Authentication
 import org.springframework.stereotype.Service
 import java.io.UnsupportedEncodingException
@@ -15,12 +16,12 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
 @Service
-open class MailService {
+open class MailServiceImpl : MailService{
+
     val properties: Properties = Properties();
     val session = Session.getDefaultInstance(properties, null)
 
-
-    fun sendMail(principal: Principal) {
+    override fun sendMail(principal: Principal) {
 
         val user: User = (principal as OAuth2Authentication).principal as User;
 

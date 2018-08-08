@@ -1,5 +1,6 @@
 package com.flock.community.api.model
 
+import community.flock.eco.feature.members.model.Member
 import java.util.*
 import javax.persistence.*
 
