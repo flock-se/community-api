@@ -4,13 +4,14 @@ package com.flock.community.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.flock.community.api.controllers.DonateController
 import com.flock.community.api.repositories.DonationRepository
-import com.flock.community.api.repositories.TransactionRepository
 import community.flock.eco.feature.members.model.Member
 import community.flock.eco.feature.members.repositories.MemberRepository
+import community.flock.eco.feature.payments.repositories.PaymentTransactionRepository
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
@@ -24,6 +25,7 @@ import java.util.*
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureTestDatabase
 class DonateIT {
 
     val mapper = ObjectMapper()
@@ -36,9 +38,6 @@ class DonateIT {
 
     @Autowired
     lateinit var donationRepository: DonationRepository
-
-    @Autowired
-    lateinit var transactionRepository: TransactionRepository
 
     @Test
     fun donationWithMember() {

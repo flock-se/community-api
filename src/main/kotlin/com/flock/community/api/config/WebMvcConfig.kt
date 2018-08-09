@@ -1,6 +1,7 @@
 package com.flock.community.api.config
 
 import community.flock.eco.feature.members.MemberConfiguration
+import community.flock.eco.feature.payments.PaymentConfiguration
 import community.flock.eco.feature.users.UserConfiguration
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.ComponentScan
@@ -15,5 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @ComponentScan(basePackages = ["com.flock.community.api"])
 @EntityScan("com.flock.community.api.*")
 @Import(UserConfiguration::class,
-        MemberConfiguration::class)
+        MemberConfiguration::class,
+        PaymentConfiguration::class)
 class WebMvcConfig : WebMvcConfigurer

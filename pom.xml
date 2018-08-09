@@ -122,6 +122,11 @@
 
         <dependency>
             <groupId>com.github.flock-se.eco</groupId>
+            <artifactId>eco-core</artifactId>
+            <version>feature~community-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.flock-se.eco</groupId>
             <artifactId>eco-feature-users</artifactId>
             <version>feature~community-SNAPSHOT</version>
         </dependency>
@@ -130,6 +135,12 @@
             <artifactId>eco-feature-members</artifactId>
             <version>feature~community-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.flock-se.eco</groupId>
+            <artifactId>eco-feature-payments</artifactId>
+            <version>feature~community-SNAPSHOT</version>
+        </dependency>
+
 
 
     </dependencies>
@@ -250,7 +261,31 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>com.github.flock-se.eco</includeGroupIds>
+                            <includes>**/*.jsx</includes>
+                            <outputDirectory>${project.build.directory}/react</outputDirectory>
+                            <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
+                            <stripVersion>true</stripVersion>
+                            <stripClassifier>true</stripClassifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
+
     </build>
 
 

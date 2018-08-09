@@ -8,6 +8,7 @@ import community.flock.eco.feature.members.MemberConfiguration
 import community.flock.eco.feature.members.model.Member
 import community.flock.eco.feature.members.model.MemberGroup
 import community.flock.eco.feature.members.repositories.MemberRepository
+import community.flock.eco.feature.payments.model.PaymentTransaction
 import community.flock.eco.feature.users.UserConfiguration
 import junit.framework.Assert.assertEquals
 import org.junit.Ignore
@@ -25,8 +26,7 @@ import javax.annotation.PostConstruct
 
 @DataJpaTest
 @RunWith(SpringRunner::class)
-@AutoConfigureTestDatabase
-@Import(WebMvcConfig::class)
+@SpringBootTest
 @Ignore
 open class DonationRepositoryTest {
 
@@ -50,7 +50,7 @@ open class DonationRepositoryTest {
                 groups = setOf(group)
         )
 
-        val transaction = Transaction(
+        val transaction = PaymentTransaction(
                 amount = 10.10,
                 reference = "123123"
         )

@@ -1,8 +1,8 @@
 package com.flock.community.api.service
 
-import com.flock.community.api.authorities.TransactionAuthority
 import community.flock.eco.core.authorities.Authority
 import community.flock.eco.feature.members.authorities.MemberAuthority
+import community.flock.eco.feature.payments.authorities.PaymentAuthority
 import community.flock.eco.feature.users.authorities.UserAuthority
 import org.springframework.stereotype.Service
 
@@ -11,7 +11,7 @@ open class AuthorityService {
     fun findAll(): List<String> {
         val list = arrayOf(
                 MemberAuthority.values(),
-                TransactionAuthority.values(),
+                PaymentAuthority.values(),
                 UserAuthority.values()
         )
 

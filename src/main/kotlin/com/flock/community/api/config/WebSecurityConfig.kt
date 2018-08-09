@@ -1,7 +1,7 @@
 package com.flock.community.api.config
 
-import com.flock.community.api.authorities.TransactionAuthority
 import community.flock.eco.feature.members.authorities.MemberAuthority
+import community.flock.eco.feature.payments.authorities.PaymentAuthority
 import community.flock.eco.feature.users.authorities.UserAuthority
 import community.flock.eco.feature.users.model.User
 import community.flock.eco.feature.users.repositories.UserRepository
@@ -28,9 +28,9 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                 .authorizeRequests()
                 .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**").permitAll()
                 .antMatchers("/_ah/**").permitAll()
-                .antMatchers( HttpMethod.POST,"/api/donate", "/api/register").permitAll()
-                .antMatchers( HttpMethod.POST,"/api/donate", "/api/register").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/buckaroo/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/donate", "/api/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/donate", "/api/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/buckaroo/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
@@ -52,8 +52,8 @@ open class SecurityConfig() : WebSecurityConfigurerAdapter() {
                         authorities = setOf(
                                 UserAuthority.READ.toName(),
                                 UserAuthority.WRITE.toName(),
-                                TransactionAuthority.READ.toName(),
-                                TransactionAuthority.WRITE.toName(),
+                                PaymentAuthority.READ.toName(),
+                                PaymentAuthority.WRITE.toName(),
                                 MemberAuthority.READ.toName(),
                                 MemberAuthority.WRITE.toName()
                         )
