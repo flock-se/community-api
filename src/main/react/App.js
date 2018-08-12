@@ -4,6 +4,7 @@ import { HashRouter, Route } from 'react-router-dom'
 
 import AppLayout from './AppLayout'
 
+import DonationManager from './donation/DonationManager'
 import UserManagement from 'eco-feature-users/UserManager.js'
 
 
@@ -26,7 +27,7 @@ class App extends React.Component {
           )}/>
 
           <Route path='/donations' exact render={(props) => (
-            <h1>Donation</h1>
+            <DonationManager/>
           )}/>
 
 
