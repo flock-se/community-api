@@ -11,9 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
-
-
-
 @Configuration
 @EnableJpaRepositories(basePackages = ["com.flock.community.api"])
 @ComponentScan(basePackages = ["com.flock.community.api"])
