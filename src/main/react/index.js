@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Welcome from 'eco-feature-users/Welcome.jsx'
+import App from './App'
+
 
 ReactDOM.render(
-  <Welcome/>,
+  <App/>,
   document.getElementById("index"));

@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
+
+
 
 
 @Configuration
@@ -18,4 +21,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @Import(UserConfiguration::class,
         MemberConfiguration::class,
         PaymentConfiguration::class)
-class WebMvcConfig : WebMvcConfigurer
+class WebMvcConfig : WebMvcConfigurer{
+    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+        registry.addResourceHandler("/ui/**")
+                .addResourceLocations("/ui/", "classpath:/")
+    }}
