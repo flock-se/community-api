@@ -23,6 +23,7 @@ class DonationTable extends React.Component {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
+              <TableCell>Frequency</TableCell>
               <TableCell>Amount</TableCell>
             </TableRow>
           </TableHead>
@@ -35,6 +36,7 @@ class DonationTable extends React.Component {
               <TableCell component="th" scope="row">
                 <Link to={`/members/${it.member.id}`} >{this.memberToName(it.member)}</Link>
               </TableCell>
+              <TableCell>{it.frequency}</TableCell>
               <TableCell>{it.amount}</TableCell>
             </TableRow>
           ))}

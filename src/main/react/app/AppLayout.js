@@ -1,16 +1,14 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
 
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import {MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
 
 import AppDrawer from './AppDrawer'
 
@@ -83,55 +81,57 @@ const styles = theme => ({
 
 class AppLayout extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       open: false,
     };
 
     this.handleDrawerOpen = () => {
-      this.setState({ open: true });
+      this.setState({open: true});
     };
 
     this.handleDrawerClose = () => {
-      this.setState({ open: false });
+      this.setState({open: false});
     };
 
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const {classes, theme} = this.props;
 
     return (
-      <div className={classes.root}>
-        <AppBar
-          position="absolute"
-          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-        >
-          <Toolbar disableGutters={!this.state.open}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, this.state.open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              Bring the elephant home
-            </Typography>
-          </Toolbar>
-        </AppBar>
+      <MuiThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <AppBar
+            position="absolute"
+            className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+          >
+            <Toolbar disableGutters={!this.state.open}>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerOpen}
+                className={classNames(classes.menuButton, this.state.open && classes.hide)}
+              >
+                <MenuIcon/>
+              </IconButton>
+              <Typography variant="title" color="inherit" noWrap>
+                Bring the elephant home
+              </Typography>
+            </Toolbar>
+          </AppBar>
 
-        <AppDrawer
-          open={this.state.open}
-          handleDrawerClose={this.handleDrawerClose}
-          theme={theme}/>
+          <AppDrawer
+            open={this.state.open}
+            handleDrawerClose={this.handleDrawerClose}
+            theme={theme}/>
 
-        <main className={classes.content}>
-          {this.props.children}
-         </main>
-      </div>
+          <main className={classes.content}>
+            {this.props.children}
+          </main>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

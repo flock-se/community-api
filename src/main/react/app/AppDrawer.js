@@ -16,7 +16,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import DonationIcon from '@material-ui/icons/Money';
-import UserIcon from '@material-ui/icons/Face';
+import MemberIcon from '@material-ui/icons/Face';
+import UserIcon from '@material-ui/icons/Person';
 
 const drawerWidth = 240;
 
@@ -104,7 +105,20 @@ class AppDrawer extends React.Component {
             {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
           </IconButton>
         </div>
+
         <Divider/>
+
+        <List>
+          <div>
+            <ListItem button component="a" href="#/members">
+              <ListItemIcon>
+                <MemberIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Member"/>
+            </ListItem>
+          </div>
+        </List>
+
         <List>
           <div>
             <ListItem button component="a" href="#/donations">
