@@ -5,13 +5,14 @@ import {HashRouter, Route} from 'react-router-dom'
 import AppLayout from './AppLayout'
 
 import DonationManager from '../donation/DonationManager'
-import MemberManager from 'eco-feature-members/MemberManager'
+import MemberManager from 'eco-feature-members/member/MemberManager'
 import UserManagement from 'eco-feature-users/UserManager'
+
+import AppSettings from './AppSettings'
 
 import {createMuiTheme} from '@material-ui/core/styles';
 
 import purple from '@material-ui/core/colors/purple';
-import orange from '@material-ui/core/colors/orange';
 
 class App extends React.Component {
 
@@ -46,6 +47,10 @@ class App extends React.Component {
 
           <Route path='/users' exact render={(props) => (
             <UserManagement/>
+          )}/>
+
+          <Route path='/settings' render={(props) => (
+            <AppSettings/>
           )}/>
 
         </AppLayout>

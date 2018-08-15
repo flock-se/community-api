@@ -17,7 +17,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import DonationIcon from '@material-ui/icons/Money';
 import MemberIcon from '@material-ui/icons/Face';
-import UserIcon from '@material-ui/icons/Person';
+import UserIcon from '@material-ui/icons/People';
+import ProfileIcon from '@material-ui/icons/Person';
+import SettingsIcon from '@material-ui/icons/SettingsSharp';
 
 const drawerWidth = 240;
 
@@ -142,6 +144,30 @@ class AppDrawer extends React.Component {
             </ListItem>
           </div>
         </List>
+
+
+        <List>
+          <div>
+            <ListItem button component="a" href="#/profile">
+              <ListItemIcon>
+                <ProfileIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Profile"/>
+            </ListItem>
+          </div>
+        </List>
+
+        <List>
+          <div>
+            <ListItem button component="a" href="#/settings">
+              <ListItemIcon>
+                <SettingsIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Settings"/>
+            </ListItem>
+          </div>
+        </List>
+
       </Drawer>
 
 

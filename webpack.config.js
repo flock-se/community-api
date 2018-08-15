@@ -9,7 +9,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 
 const replacementPlugin = new webpack.NormalModuleReplacementPlugin(
   /eco-feature-(.*)/, (resource) => {
-    const ref = resource.request.replace(/eco-feature-(.*)\/(.*)/, 'eco-feature-$1-jar/$2')
+    const ref = resource.request.replace(/eco-feature-([^\/]*)\/(.*)/, 'eco-feature-$1-jar/$2')
     resource.request = path.join(__dirname, 'target/react', ref)
   }
 );
