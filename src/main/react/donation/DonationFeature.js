@@ -13,7 +13,7 @@ const styles = theme => ({
   }
 });
 
-class DonationManager extends React.Component {
+class DonationFeature extends React.Component {
 
   constructor(props) {
     super(props);
@@ -52,4 +52,4 @@ class DonationManager extends React.Component {
   }
 };
 
-export default withStyles(styles)(DonationManager);
+export default withStyles(styles)(DonationFeature);

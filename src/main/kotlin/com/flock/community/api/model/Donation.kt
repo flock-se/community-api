@@ -1,7 +1,7 @@
 package com.flock.community.api.model
 
-import community.flock.eco.feature.members.model.Member
-import community.flock.eco.feature.payments.model.PaymentTransaction
+import community.flock.eco.feature.member.model.Member
+import community.flock.eco.feature.payment.model.PaymentTransaction
 import java.util.*
 import javax.persistence.*
 

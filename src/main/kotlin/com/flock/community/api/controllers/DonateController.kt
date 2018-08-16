@@ -4,8 +4,8 @@ import com.flock.community.api.model.Donation
 import com.flock.community.api.model.Frequency
 import com.flock.community.api.repositories.DonationRepository
 import com.flock.community.api.service.BuckarooService
-import community.flock.eco.feature.members.model.Member
-import community.flock.eco.feature.payments.model.PaymentTransaction
+import community.flock.eco.feature.member.model.Member
+import community.flock.eco.feature.payment.model.PaymentTransaction
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

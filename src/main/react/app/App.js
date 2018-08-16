@@ -4,9 +4,9 @@ import {HashRouter, Route} from 'react-router-dom'
 
 import AppLayout from './AppLayout'
 
-import DonationManager from '../donation/DonationManager'
-import MemberManager from 'eco-feature-members/member/MemberManager'
-import UserManagement from 'eco-feature-users/UserManager'
+import DonationFeature from '../donation/DonationFeature'
+import MemberFeature from 'eco-feature-member/member/MemberFeature'
+import UserFeature from 'eco-feature-user/user/UserFeature'
 
 import AppSettings from './AppSettings'
 
@@ -38,15 +38,15 @@ class App extends React.Component {
           )}/>
 
           <Route path='/members' exact render={(props) => (
-            <MemberManager/>
+            <MemberFeature/>
           )}/>
 
           <Route path='/donations' exact render={(props) => (
-            <DonationManager/>
+            <DonationFeature/>
           )}/>
 
           <Route path='/users' exact render={(props) => (
-            <UserManagement/>
+            <UserFeature/>
           )}/>
 
           <Route path='/settings' render={(props) => (

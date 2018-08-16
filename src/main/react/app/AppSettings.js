@@ -11,7 +11,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import MemberGroupManager from 'eco-feature-members/member_group/MemberGroupManager'
+import MemberGroupFeature from 'eco-feature-member/member_group/MemberGroupFeature'
 
 const styles = {}
 
@@ -50,7 +50,7 @@ class AppSettings extends React.Component {
             )}/>
 
             <Route path='/settings/member_group' exact render={(props) => (
-              <MemberGroupManager/>
+              <MemberGroupFeature/>
             )}/>
 
           </Paper>

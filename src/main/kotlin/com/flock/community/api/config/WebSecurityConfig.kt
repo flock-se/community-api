@@ -1,10 +1,10 @@
 package com.flock.community.api.config
 
-import community.flock.eco.feature.members.authorities.MemberAuthority
-import community.flock.eco.feature.payments.authorities.PaymentAuthority
-import community.flock.eco.feature.users.authorities.UserAuthority
-import community.flock.eco.feature.users.model.User
-import community.flock.eco.feature.users.repositories.UserRepository
+import community.flock.eco.feature.member.authorities.MemberAuthority
+import community.flock.eco.feature.payment.authorities.PaymentAuthority
+import community.flock.eco.feature.user.authorities.UserAuthority
+import community.flock.eco.feature.user.model.User
+import community.flock.eco.feature.user.repositories.UserRepository
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor

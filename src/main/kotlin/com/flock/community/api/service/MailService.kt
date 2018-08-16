@@ -1,7 +1,7 @@
 package com.flock.community.api.service
 
 import community.flock.eco.core.services.MailService
-import community.flock.eco.feature.users.model.User
+import community.flock.eco.feature.user.model.User
 import org.springframework.security.oauth2.provider.OAuth2Authentication
 import org.springframework.stereotype.Service
 import java.io.UnsupportedEncodingException
