@@ -95,17 +95,10 @@ class AppDrawer extends React.Component {
     super(props);
 
     this.state = {
-      showUser: false
+      authorities: {hasAuthority:()=>{}}
     }
 
-    AppAuthority.hasAuthority("MemberAuthority.READ")
-      .then(it => this.setState({showMember: it}))
-
-    AppAuthority.hasAuthority("UserAuthority.READ")
-      .then(it => this.setState({showUser: it}))
-
-    AppAuthority.hasAuthority("UserDonations.READ")
-      .then(it => this.setState({showDonation: it}))
+    AppAuthority.then(authorities => this.setState({authorities}))
   }
 
   render() {
@@ -128,7 +121,7 @@ class AppDrawer extends React.Component {
 
         <Divider/>
 
-        {this.state.showMember ?
+        {this.state.authorities.hasAuthority("MemberAuthority.READ") ?
         <List>
           <div>
             <ListItem button component="a" href="#/members">
@@ -141,7 +134,7 @@ class AppDrawer extends React.Component {
         </List>: null
         }
 
-        {this.state.showDonation ?
+        {this.state.authorities.hasAuthority("DonationsAuthority.READ") ?
           <List>
             <div>
               <ListItem button component="a" href="#/donations">
@@ -156,7 +149,7 @@ class AppDrawer extends React.Component {
         }
         <Divider/>
 
-        {this.state.showUser ?
+        {this.state.authorities.hasAuthority("UserAuthority.READ") ?
           <List>
             <div>
               <ListItem button component="a" href="#/users">
