@@ -14,9 +14,4 @@ open class HealthController {
         return "OK"
     }
 
-    @GetMapping("/start")
-    fun start(): String {
-        return "OK"
-    }
-
 }

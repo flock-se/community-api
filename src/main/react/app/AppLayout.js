@@ -82,20 +82,23 @@ const styles = theme => ({
 class AppLayout extends React.Component {
 
   constructor(props) {
+
     super(props);
+
     this.state = {
       open: false,
     };
 
-    this.handleDrawerOpen = () => {
-      this.setState({open: true});
-    };
-
-    this.handleDrawerClose = () => {
-      this.setState({open: false});
-    };
-
   }
+
+  handleDrawerOpen() {
+    this.setState({open: true});
+  };
+
+
+  handleDrawerClose() {
+    this.setState({open: false});
+  };
 
   render() {
     const {classes, theme} = this.props;
@@ -123,7 +126,7 @@ class AppLayout extends React.Component {
           </AppBar>
 
           <AppDrawer
-            open={this.state.open}
+            authorities={this.state.authorities}
             handleDrawerClose={this.handleDrawerClose}
             theme={theme}/>
 
@@ -134,6 +137,7 @@ class AppLayout extends React.Component {
       </MuiThemeProvider>
     );
   }
+
 }
 
 AppLayout.propTypes = {

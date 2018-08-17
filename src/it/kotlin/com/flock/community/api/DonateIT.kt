@@ -2,11 +2,10 @@ package com.flock.community.api
 
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.flock.community.api.controllers.DonateController
+import com.flock.community.api.controllers.DonationsController
 import com.flock.community.api.repositories.DonationRepository
 import community.flock.eco.feature.member.model.Member
 import community.flock.eco.feature.member.repositories.MemberRepository
-import community.flock.eco.feature.payment.repositories.PaymentTransactionRepository
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,7 +49,7 @@ class DonateIT {
                 email = email
         )
 
-        val donate = DonateController.Donate(
+        val donate = DonationsController.Donate(
                 member = member,
                 amount = 10.00,
                 issuer = "INGBNL2A",
@@ -58,7 +57,7 @@ class DonateIT {
                 newsletter = true
         )
 
-        mockMvc.perform(post("/api/donate")
+        mockMvc.perform(post("/api/donations/donate")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsBytes(donate)))
                 .andDo(print())
@@ -69,10 +68,10 @@ class DonateIT {
 
         assertEquals(email, memberRes.email)
         assertEquals(10.0, donationList.first().amount, 0.0)
-        assertNull( donationList.first().transactions.toList()[0].confirmed)
+        assertNull(donationList.first().transactions.toList()[0].confirmed)
 
         // Confirm Transcation
-        mockMvc.perform(post("/api/buckaroo/success")
+        mockMvc.perform(post("/api/payment/buckaroo/success")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"Transaction\": {\"Key\": \"${donationList.first().transactions.first().reference}\"}}"))
                 .andDo(print())
@@ -88,19 +87,18 @@ class DonateIT {
     @Test
     fun donationAnoniem() {
 
-        val donate = DonateController.Donate(
+        val donate = DonationsController.Donate(
                 amount = 10.00,
                 issuer = "INGBNL2A",
                 agreeOnTerms = true,
                 newsletter = true
         )
 
-        mockMvc.perform(post("/api/donate")
+        mockMvc.perform(post("/api/donations/donate")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsBytes(donate)))
                 .andDo(print())
                 .andExpect(status().isOk())
-
 
 
     }

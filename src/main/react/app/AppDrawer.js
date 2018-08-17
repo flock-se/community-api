@@ -20,6 +20,7 @@ import MemberIcon from '@material-ui/icons/Face';
 import UserIcon from '@material-ui/icons/People';
 import ProfileIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/SettingsSharp';
+import AppAuthority from "./AppAuthority";
 
 const drawerWidth = 240;
 
@@ -90,6 +91,16 @@ const styles = theme => ({
 class AppDrawer extends React.Component {
 
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authorities: {hasAuthority:()=>{}}
+    }
+
+    AppAuthority.then(authorities => this.setState({authorities}))
+  }
+
   render() {
     const {classes, theme} = this.props;
 
@@ -110,6 +121,7 @@ class AppDrawer extends React.Component {
 
         <Divider/>
 
+        {this.state.authorities.hasAuthority("MemberAuthority.READ") ?
         <List>
           <div>
             <ListItem button component="a" href="#/members">
@@ -119,31 +131,36 @@ class AppDrawer extends React.Component {
               <ListItemText primary="Member"/>
             </ListItem>
           </div>
-        </List>
+        </List>: null
+        }
 
-        <List>
-          <div>
-            <ListItem button component="a" href="#/donations">
-              <ListItemIcon>
-                <DonationIcon/>
-              </ListItemIcon>
-              <ListItemText primary="Donations"/>
-            </ListItem>
-          </div>
-        </List>
-
+        {this.state.authorities.hasAuthority("DonationsAuthority.READ") ?
+          <List>
+            <div>
+              <ListItem button component="a" href="#/donations">
+                <ListItemIcon>
+                  <DonationIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Donations"/>
+              </ListItem>
+            </div>
+          </List>
+          : null
+        }
         <Divider/>
 
-        <List>
-          <div>
-            <ListItem button component="a" href="#/users">
-              <ListItemIcon>
-                <UserIcon/>
-              </ListItemIcon>
-              <ListItemText primary="Users"/>
-            </ListItem>
-          </div>
-        </List>
+        {this.state.authorities.hasAuthority("UserAuthority.READ") ?
+          <List>
+            <div>
+              <ListItem button component="a" href="#/users">
+                <ListItemIcon>
+                  <UserIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Users"/>
+              </ListItem>
+            </div>
+          </List> : null
+        }
 
 
         <List>
