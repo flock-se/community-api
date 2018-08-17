@@ -57,6 +57,7 @@ class App extends React.Component {
       </HashRouter>
     )
   }
+
 }
 
 export default App
