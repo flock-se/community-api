@@ -30,7 +30,11 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ['env', 'react']
+            presets: [
+              'env',
+              'react',
+              'stage-2'
+            ]
           }
         }
       }
