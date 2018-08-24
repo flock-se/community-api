@@ -30,24 +30,29 @@ class DonationTable extends React.Component {
               <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{data.map(it => (
-            <TableRow
-              key={it.id}
-              hover
-              onClick={event => this.handleClick(it)}
-            >
-              <TableCell component="th" scope="row">
-                <Link to={`/members/${it.member.id}`}>{this.memberToName(it.member)}</Link>
-              </TableCell>
-              <TableCell>{it.frequency}</TableCell>
-              <TableCell>{it.amount}</TableCell>
-              <TableCell>
-                <Chip
-                  label="Status"
-                  color="primary"/>
-              </TableCell>
-            </TableRow>
-          ))}
+          <TableBody>{data.map(it => {
+            const status = it.transactions[0].status
+            return (
+              <TableRow
+                key={it.id}
+                hover
+                onClick={event => this.handleClick(it)}
+              >
+                <TableCell component="th" scope="row">
+                  <Link to={`/members/${it.member.id}`}>{this.memberToName(it.member)}</Link>
+                </TableCell>
+                <TableCell>{it.frequency}</TableCell>
+                <TableCell>{it.amount}</TableCell>
+                <TableCell>
+                  {status === 'PENDING' ?  <Chip label="Pending" style={{backgroundColor: 'orange'}}/> : null}
+                  {status === 'ERROR' ?  <Chip label="Error" style={{backgroundColor: 'red'}}/> : null}
+                  {status === 'SUCCESS' ?  <Chip label="Success" style={{backgroundColor: 'green'}}/> : null}
+
+
+                </TableCell>
+              </TableRow>
+            )
+          })}
           </TableBody>
         </Table>
       </Paper>
