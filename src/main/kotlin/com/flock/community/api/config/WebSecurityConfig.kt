@@ -20,7 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 @Configuration
 @EnableOAuth2Sso
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-open class SecurityConfig() : WebSecurityConfigurerAdapter() {
+open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
 
