@@ -89,16 +89,16 @@ class AppLayout extends React.Component {
       open: false,
     };
 
+    this.handleDrawerOpen = () => {
+      this.setState({open: true});
+    };
+
+    this.handleDrawerClose = () => {
+      this.setState({open: false});
+    };
+
   }
 
-  handleDrawerOpen() {
-    this.setState({open: true});
-  };
-
-
-  handleDrawerClose() {
-    this.setState({open: false});
-  };
 
   render() {
     const {classes, theme} = this.props;
@@ -128,7 +128,8 @@ class AppLayout extends React.Component {
           <AppDrawer
             authorities={this.state.authorities}
             handleDrawerClose={this.handleDrawerClose}
-            theme={theme}/>
+            theme={theme}
+            open={this.state.open}/>
 
           <main className={classes.content}>
             {this.props.children}
