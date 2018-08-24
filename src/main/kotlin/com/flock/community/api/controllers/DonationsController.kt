@@ -6,6 +6,7 @@ import com.flock.community.api.repositories.DonationRepository
 import com.flock.community.api.service.BuckarooService
 import community.flock.eco.feature.member.model.Member
 import community.flock.eco.feature.payment.model.PaymentTransaction
+import community.flock.eco.feature.payment.model.PaymentTransactionStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -40,7 +41,8 @@ open class DonationsController(
 
         val transaction = PaymentTransaction(
                 amount = donate.amount,
-                reference = buckarooTransaction.reference
+                reference = buckarooTransaction.reference,
+                status=PaymentTransactionStatus.PENDING
         )
 
         val donation = Donation(

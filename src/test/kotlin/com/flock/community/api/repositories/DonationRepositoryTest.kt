@@ -5,6 +5,7 @@ import com.flock.community.api.model.Frequency
 import community.flock.eco.feature.member.model.Member
 import community.flock.eco.feature.member.model.MemberGroup
 import community.flock.eco.feature.payment.model.PaymentTransaction
+import community.flock.eco.feature.payment.model.PaymentTransactionStatus
 import junit.framework.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
@@ -43,7 +44,8 @@ open class DonationRepositoryTest {
 
         val transaction = PaymentTransaction(
                 amount = 10.10,
-                reference = "123123"
+                reference = "123123",
+                status = PaymentTransactionStatus.PENDING
         )
 
         val donation = Donation(
