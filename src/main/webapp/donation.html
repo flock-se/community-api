@@ -1,0 +1,313 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<form id="donation">
+    <div class="container mr-5">
+        <div class="row">
+            <div class="col-sm"><b>Hoeveel wilt u doneren?</b>
+                <div id="amount-radio" class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="amount" id="amount-5" value="5" required>
+                        <label class="form-check-label" for="amount-5">€ 5,00</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="amount" id="amount-10" value="10" required>
+                        <label class="form-check-label" for="amount-10">€ 10,00</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="amount" id="amount-50" value="50" required>
+                        <label class="form-check-label" for="amount-50">€
+                            50,00</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="amount" id="amount-other" value="other" required>
+                        <label class="form-check-label" for="amount-other">ander bedrag</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="other-amount-input" class="row d-none">
+        <div class="col-sm-7 col-md-6 col-lg-5">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend"><span class="input-group-text">€</span></div>
+                <div><input type="text" class="form-control input" aria-label="Amount (to the nearest dollar)">
+                </div>
+                <div class="input-group-append"><span class="input-group-text">.00</span></div>
+            </div>
+        </div>
+    </div>
+    <div id="payment-method" class="row">
+        <div class="col-sm-6"><b>Hoe wilt u betalen?</b></br>
+            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                                             name="paymentmethod" id="ideal" value="ideal" required><label
+                    class="form-check-label" for="ideal">iDEAL</label></div>
+            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                                             name="paymentmethod" id="creditcard" value="creditcard"
+                                                             required><label class="form-check-label"
+                                                                             for="creditcard">Creditcard</label>
+            </div>
+        </div>
+    </div>
+    <div id="bank-select-input" class="row mt-3 d-none">
+        <div class="col-sm-6">
+            <div class="form-group"><label class="mr-2" for="bank-select">Selecteer uw bank</label><select
+                    id="bank-select" class="input">
+                <option selected disabled hidden value="">Maak een keuze</option>
+            </select></div>
+        </div>
+    </div>
+    <div id="creditcard-select-input" class="row mt-3 d-none">
+        <div class="col-sm-6">
+            <div class="form-group"><label class="mr-2" for="creditcard-select">Selecteer uw
+                creditcardmaatschappij</label><select id="creditcard-select" class="input">
+                <option selected disabled hidden value="">Maak een keuze</option>
+            </select></div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6"><b>Wat zijn uw gegevens?</b></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-check"><input type="checkbox" class="form-check-input" id="anonymous"><label
+                    class="form-check-label" for="anonymous">Ik wil anoniem doneren</label></div>
+        </div>
+    </div>
+    <div id="personal-data">
+        <div class="row">
+            <div class="col-sm-6"></br>
+                <div class="form-group">
+                    <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                                                     name="gender" id="male" value="MALE"
+                                                                     required><label class="form-check-label"
+                                                                                     for="male">Dhr.</label></div>
+                    <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                                                     name="gender" id="female" value="FEMALE"
+                                                                     required><label class="form-check-label"
+                                                                                     for="female">Mevr.</label>
+                    </div>
+                    <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                                                     name="gender" id="different" value="OTHER"
+                                                                     required><label class="form-check-label"
+                                                                                     for="different">Anders</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 col-md-4">
+                <div class="form-group"><input type="text" class="form-control" id="firstName"
+                                               placeholder="Voornaam" required></div>
+            </div>
+            <div class="col-sm-2 col-md-2">
+                <div class="form-group"><input type="text" class="form-control" id="infix"
+                                               placeholder="Tussenvoegsel"></div>
+            </div>
+            <div class="col-sm-5 col-md-4">
+                <div class="form-group"><input type="text" class="form-control" id="surName"
+                                               placeholder="Achternaam" required></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <div class="form-group"><input type="text" class="form-control" id="postalCode" placeholder="1234AB"
+                                               required></div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div class="form-group"><input type="text" class="form-control" id="houseNumber"
+                                               placeholder="Huisnr." required></div>
+            </div>
+            <div class="col-sm-2 col-md-2">
+                <div class="form-group"><input type="text" class="form-control" id="houseNumberExtension"
+                                               placeholder="Toev."></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group"><input type="number" class="form-control" id="phoneNumber"
+                                               placeholder="Telefoonnummer"
+                                               pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$"
+                                               required></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group"><input type="text" class="form-control" id="email" placeholder="Emailadres"
+                                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-check"><input type="checkbox" class="form-check-input" id="terms" required><label
+                    class="form-check-label" for="terms">Ik ben akkoord met de <a href="#">voorwaarden</a></label>
+            </div>
+            <div class="form-check"><input type="checkbox" class="form-check-input" id="newsletter"><label
+                    class="form-check-label" for="newsletter">Ik ontvang graag de nieuwsbrief</label></div>
+        </div>
+    </div>
+    <div id="error-notification" class="row mt-3 d-none">
+        <div class="col-sm-12">
+            <div class="alert alert-danger"><strong>Er is iets fout gegaan</strong> probeer het later nogmaals.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px">Bevestig</button>
+        </div>
+    </div>
+    </div>
+</form>
+<script>
+    // CONFIG
+    var bankOptions = [{label: 'ABN AMRO', value: 'ABNANL2A'}, {label: 'ASN Bank', value: 'ASNBNL21'}, {
+        label: 'ING BANK',
+        value: 'INGBNL2A'
+    }, {label: 'Rabobank', value: 'RABONL2U'},
+        {label: 'SNS Bank', value: 'SNSBNL2A'}, {label: 'SNS Regio Bank', value: 'RBRBNL21'}, {
+            label: 'Triodos Bank',
+            value: 'TRIONL2U'
+        }, {label: 'Van Lanschot', value: 'FVLBNL22'},
+        {label: 'Knab', value: 'KNABNL2H'}, {label: 'Bunq', value: 'BUNQNL2A'}, {label: 'Moneyou', value: 'MOYONL21'}];
+    var creditCardOptions = [{label: 'MasterCard', value: 'MasterCard'}, {
+        label: 'Visa',
+        value: 'Visa'
+    }, {label: 'American Express', value: 'American Express'}];
+    var hideClass = 'd-none';
+    // ELEMENTS
+    var anonymousCheckbox = document.querySelector('#anonymous');
+    var amountRadioButtons = document.querySelector('#amount-radio');
+    var bankSelectElement = document.querySelector('#bank-select');
+    var errorNotificationElement = document.querySelector('#error-notification');
+    var paymentMethodRadioButtons = document.querySelector('#payment-method');
+    var personalDataForm = document.querySelector('#personal-data');
+    // FUNCTIONS
+    var getOptionElement = function (item) {
+        var optionElement = document.createElement("option");
+        optionElement.text = item.label;
+        optionElement.value = item.value;
+        return optionElement;
+    }
+    var showElement = function (el) {
+        el.classList.remove(hideClass);
+        el.querySelector('.input').setAttribute("required", "");
+    }
+    var hideElement = function (el) {
+        el.className += (" " + hideClass);
+        el.querySelector('.input').removeAttribute("required");
+    }
+    var addRequiredOnInput = function (el) {
+        el.querySelectorAll('input').forEach(function (inputEl) {
+            if (inputEl.hasAttribute("notrequired"))
+                inputEl.setAttribute("required", "");
+            inputEl.removeAttribute("notrequired");
+        });
+    }
+    var removeRequiredOnInput = function (el) {
+        el.querySelectorAll('input').forEach(function (inputEl) {
+            inputEl.setAttribute("notrequired", "");
+            inputEl.removeAttribute("required");
+        });
+    }
+    // SETTING UP FORM
+    bankOptions.forEach(function (item) {
+        bankSelectElement.appendChild(getOptionElement(item));
+    });
+    var creditcardSelectElement = document.querySelector("#creditcard-select");
+    creditCardOptions.forEach(function (item) {
+        creditcardSelectElement.appendChild(getOptionElement(item));
+    });
+    // VISIBILITY TOGGLES
+    amountRadioButtons.addEventListener('click', function () {
+        var otherAmountRadio = amountRadioButtons.querySelector('#amount-other');
+        var otherAmountInput = document.querySelector('#other-amount-input');
+        var otherAmountRadio = otherAmountRadio.checked;
+        var otherAmountInputHidden = otherAmountInput.classList.contains(hideClass);
+        if (otherAmountRadio && otherAmountInputHidden) {
+            showElement(otherAmountInput);
+        } else if (!otherAmountRadio && !otherAmountInputHidden) {
+            hideElement(otherAmountInput);
+        }
+    });
+    paymentMethodRadioButtons.addEventListener("click", function () {
+        var ideal = document.querySelector('#ideal').checked;
+        var creditcard = document.querySelector('#creditcard').checked;
+        var bankSelectInput = document.querySelector('#bank-select-input');
+        var creditCardSelectInput = document.querySelector('#creditcard-select-input');
+        var idealRadioButton = document.querySelector('#ideal').checked;
+        if (ideal && bankSelectInput.classList.contains(hideClass)) {
+            showElement(bankSelectInput);
+            hideElement(creditCardSelectInput);
+        } else if (!ideal && creditcard && creditCardSelectInput.classList.contains(hideClass)) {
+            showElement(creditCardSelectInput);
+            hideElement(bankSelectInput);
+        }
+    });
+    anonymousCheckbox.addEventListener("change", function () {
+        if (anonymousCheckbox.checked && !personalDataForm.classList.contains(hideClass)) {
+            personalDataForm.className += (" " + hideClass);
+            removeRequiredOnInput(personalDataForm);
+        } else if (!anonymousCheckbox.checked && personalDataForm.classList.contains(hideClass)) {
+            personalDataForm.classList.remove(hideClass);
+            addRequiredOnInput(personalDataForm);
+        }
+    });
+    // FORM SUBMIT
+    document.addEventListener("submit", function () {
+        event.preventDefault();
+        donate();
+    });
+    var toggleErrorNotification = function (showError) {
+        showError ? errorNotificationElement.classList.remove(hideClass) : errorNotificationElement.className += (" " + hideClass);
+    }
+    function donate() {
+        toggleErrorNotification(false);
+        var donationData;
+        var personalDataObj = {};
+        var anonymous = document.querySelector('#anonymous').checked;
+        var agreedOnTerms = document.querySelector('#terms').checked;
+        var newsletter = document.querySelector('#newsletter').checked;
+// Get payment data
+        var paymentMethod = document.querySelector('input[name=paymentmethod]:checked').value;
+        var issuer = document.querySelector("#bank-select").value;
+        var amountSelectValue = document.querySelector('input[name=amount]:checked').value;
+        var amount;
+        if (amountSelectValue === 'other') {
+            amount = document.querySelector("#other-amount-input input").value;
+        } else {
+            amount = amountSelectValue;
+        }
+        donationData = {
+            issuer,
+            amount,
+            newsletter,
+            agreedOnTerms
+        }
+        if (!anonymous) {
+// Get personal data
+            personalDataForm.querySelectorAll('input[type="text"]').forEach(
+                function (item) {
+                    if (item.value === "") return;
+                    personalDataObj[item.id] = item.value;
+                });
+            personalDataObj.gender = personalDataForm.querySelector('input:checked').value;
+            donationData.member = personalDataObj
+        }
+        var xhrObj = {
+            'type': 'POST',
+            'url': '/api/donations/donate',
+            'contentType': 'application/json',
+            'data': JSON.stringify(donationData),
+            'dataType': 'text',
+            'success': function (response) {
+                window.location.href = response;
+            },
+            'error': function (error) {
+                toggleErrorNotification(true);
+            }
+        };
+        return jQuery.ajax(xhrObj);
+    }
+</script>
