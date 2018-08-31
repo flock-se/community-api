@@ -43,7 +43,7 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
 
             val user = userRepository.findByReference(reference)
 
-            if (user == null) {
+            if (!user.isPresent) {
                 userRepository.save(User(
                         reference = reference,
                         name = it.get("name").toString(),
@@ -58,7 +58,7 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
                         )
                 ))
             } else {
-                user
+                user.get()
             }
         }
     }
