@@ -75,7 +75,7 @@ class DonateIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"Transaction\": {\"Key\": \"${donationList.first().transactions.first().reference}\"}}"))
                 .andDo(print())
-                .andExpect(status().isOk())
+                .andExpect(status().is2xxSuccessful())
 
 
         val donationListConfirmed = donationRepository.findByMemberId(memberRes.id)
