@@ -69,7 +69,7 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
         return AuthoritiesExtractor {
             val reference = it.get("email").toString()
             val user = userRepository.findByReference(reference)
-            user?.authorities?.map { SimpleGrantedAuthority(it) } ?: listOf()
+            user.map { it.authorities.map { SimpleGrantedAuthority(it) }}.orElse(listOf())
         }
     }
 
