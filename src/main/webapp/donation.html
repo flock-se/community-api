@@ -15,8 +15,7 @@
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="amount" id="amount-50" value="50" required>
-                        <label class="form-check-label" for="amount-50">€
-                        50,00</label>
+                        <label class="form-check-label" for="amount-50">€ 50,00</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="amount" id="amount-other" value="other" required>
@@ -171,10 +170,10 @@
       value: 'TRIONL2U'
     }, {label: 'Van Lanschot', value: 'FVLBNL22'},
     {label: 'Knab', value: 'KNABNL2H'}, {label: 'Bunq', value: 'BUNQNL2A'}, {label: 'Moneyou', value: 'MOYONL21'}];
-  var creditCardOptions = [{label: 'MasterCard', value: 'MasterCard'}, {
+  var creditCardOptions = [{label: 'MasterCard', value: 'mastercard'}, {
     label: 'Visa',
-    value: 'Visa'
-  }, {label: 'American Express', value: 'American Express'}];
+    value: 'visa'
+  }, {label: 'American Express', value: 'Amex'}];
   var hideClass = 'd-none';
   // ELEMENTS
   var anonymousCheckbox = document.querySelector('#anonymous');
@@ -189,28 +188,28 @@
     optionElement.text = item.label;
     optionElement.value = item.value;
     return optionElement;
-  }
+  };
   var showElement = function (el) {
     el.classList.remove(hideClass);
     el.querySelector('.input').setAttribute("required", "");
-  }
+  };
   var hideElement = function (el) {
     el.className += (" " + hideClass);
     el.querySelector('.input').removeAttribute("required");
-  }
+  };
   var addRequiredOnInput = function (el) {
     el.querySelectorAll('input').forEach(function (inputEl) {
       if (inputEl.hasAttribute("notrequired"))
         inputEl.setAttribute("required", "");
       inputEl.removeAttribute("notrequired");
     });
-  }
+  };
   var removeRequiredOnInput = function (el) {
     el.querySelectorAll('input').forEach(function (inputEl) {
       inputEl.setAttribute("notrequired", "");
       inputEl.removeAttribute("required");
     });
-  }
+  };
   // SETTING UP FORM
   bankOptions.forEach(function (item) {
     bankSelectElement.appendChild(getOptionElement(item));
@@ -261,8 +260,7 @@
   });
   var toggleErrorNotification = function (showError) {
     showError ? errorNotificationElement.classList.remove(hideClass) : errorNotificationElement.className += (" " + hideClass);
-  }
-
+  };
   function donate() {
     toggleErrorNotification(false);
     var donationData;
@@ -272,7 +270,7 @@
     var newsletter = document.querySelector('#newsletter').checked;
     // Get payment data
     var paymentMethod = document.querySelector('input[name=paymentmethod]:checked').value;
-    var issuer = document.querySelector("#bank-select").value;
+    var issuer = document.querySelector("#" + paymentMethod + "-select").value;
     var amountSelectValue = document.querySelector('input[name=amount]:checked').value;
     var amount;
     if (amountSelectValue === 'other') {
@@ -281,11 +279,14 @@
       amount = amountSelectValue;
     }
     donationData = {
-      issuer,
-      amount,
+        payment: {
+        paymentMethod,
+        issuer,
+        amount
+        },
       newsletter,
       agreedOnTerms
-    }
+    };
     if (!anonymous) {
       // Get personal data
       personalDataForm.querySelectorAll('input[type="text"]').forEach(
