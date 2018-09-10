@@ -19,7 +19,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/main/react'),
 
   output: {
-    path: path.resolve(__dirname, 'target/generated-resources')
+    path: path.resolve(__dirname, 'src/main/webapp')
   },
 
   module: {

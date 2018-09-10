@@ -16,7 +16,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="amount" id="amount-50" value="50" required>
                         <label class="form-check-label" for="amount-50">€
-                            50,00</label>
+                        50,00</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="amount" id="amount-other" value="other" required>
@@ -161,153 +161,156 @@
     </div>
 </form>
 <script>
-    // CONFIG
-    var bankOptions = [{label: 'ABN AMRO', value: 'ABNANL2A'}, {label: 'ASN Bank', value: 'ASNBNL21'}, {
-        label: 'ING BANK',
-        value: 'INGBNL2A'
-    }, {label: 'Rabobank', value: 'RABONL2U'},
-        {label: 'SNS Bank', value: 'SNSBNL2A'}, {label: 'SNS Regio Bank', value: 'RBRBNL21'}, {
-            label: 'Triodos Bank',
-            value: 'TRIONL2U'
-        }, {label: 'Van Lanschot', value: 'FVLBNL22'},
-        {label: 'Knab', value: 'KNABNL2H'}, {label: 'Bunq', value: 'BUNQNL2A'}, {label: 'Moneyou', value: 'MOYONL21'}];
-    var creditCardOptions = [{label: 'MasterCard', value: 'MasterCard'}, {
-        label: 'Visa',
-        value: 'Visa'
-    }, {label: 'American Express', value: 'American Express'}];
-    var hideClass = 'd-none';
-    // ELEMENTS
-    var anonymousCheckbox = document.querySelector('#anonymous');
-    var amountRadioButtons = document.querySelector('#amount-radio');
-    var bankSelectElement = document.querySelector('#bank-select');
-    var errorNotificationElement = document.querySelector('#error-notification');
-    var paymentMethodRadioButtons = document.querySelector('#payment-method');
-    var personalDataForm = document.querySelector('#personal-data');
-    // FUNCTIONS
-    var getOptionElement = function (item) {
-        var optionElement = document.createElement("option");
-        optionElement.text = item.label;
-        optionElement.value = item.value;
-        return optionElement;
+  // CONFIG
+  var bankOptions = [{label: 'ABN AMRO', value: 'ABNANL2A'}, {label: 'ASN Bank', value: 'ASNBNL21'}, {
+    label: 'ING BANK',
+    value: 'INGBNL2A'
+  }, {label: 'Rabobank', value: 'RABONL2U'},
+    {label: 'SNS Bank', value: 'SNSBNL2A'}, {label: 'SNS Regio Bank', value: 'RBRBNL21'}, {
+      label: 'Triodos Bank',
+      value: 'TRIONL2U'
+    }, {label: 'Van Lanschot', value: 'FVLBNL22'},
+    {label: 'Knab', value: 'KNABNL2H'}, {label: 'Bunq', value: 'BUNQNL2A'}, {label: 'Moneyou', value: 'MOYONL21'}];
+  var creditCardOptions = [{label: 'MasterCard', value: 'mastercard'}, {
+    label: 'Visa',
+    value: 'visa'
+  }, {label: 'American Express', value: 'Amex'}];
+  var hideClass = 'd-none';
+  // ELEMENTS
+  var anonymousCheckbox = document.querySelector('#anonymous');
+  var amountRadioButtons = document.querySelector('#amount-radio');
+  var bankSelectElement = document.querySelector('#bank-select');
+  var errorNotificationElement = document.querySelector('#error-notification');
+  var paymentMethodRadioButtons = document.querySelector('#payment-method');
+  var personalDataForm = document.querySelector('#personal-data');
+  // FUNCTIONS
+  var getOptionElement = function (item) {
+    var optionElement = document.createElement("option");
+    optionElement.text = item.label;
+    optionElement.value = item.value;
+    return optionElement;
+  };
+  var showElement = function (el) {
+    el.classList.remove(hideClass);
+    el.querySelector('.input').setAttribute("required", "");
+  };
+  var hideElement = function (el) {
+    el.className += (" " + hideClass);
+    el.querySelector('.input').removeAttribute("required");
+  };
+  var addRequiredOnInput = function (el) {
+    el.querySelectorAll('input').forEach(function (inputEl) {
+      if (inputEl.hasAttribute("notrequired"))
+        inputEl.setAttribute("required", "");
+      inputEl.removeAttribute("notrequired");
+    });
+  };
+  var removeRequiredOnInput = function (el) {
+    el.querySelectorAll('input').forEach(function (inputEl) {
+      inputEl.setAttribute("notrequired", "");
+      inputEl.removeAttribute("required");
+    });
+  };
+  // SETTING UP FORM
+  bankOptions.forEach(function (item) {
+    bankSelectElement.appendChild(getOptionElement(item));
+  });
+  var creditcardSelectElement = document.querySelector("#creditcard-select");
+  creditCardOptions.forEach(function (item) {
+    creditcardSelectElement.appendChild(getOptionElement(item));
+  });
+  // VISIBILITY TOGGLES
+  amountRadioButtons.addEventListener('click', function () {
+    var otherAmountRadio = amountRadioButtons.querySelector('#amount-other');
+    var otherAmountInput = document.querySelector('#other-amount-input');
+    var otherAmountRadio = otherAmountRadio.checked;
+    var otherAmountInputHidden = otherAmountInput.classList.contains(hideClass);
+    if (otherAmountRadio && otherAmountInputHidden) {
+      showElement(otherAmountInput);
+    } else if (!otherAmountRadio && !otherAmountInputHidden) {
+      hideElement(otherAmountInput);
     }
-    var showElement = function (el) {
-        el.classList.remove(hideClass);
-        el.querySelector('.input').setAttribute("required", "");
+  });
+  paymentMethodRadioButtons.addEventListener("click", function () {
+    var ideal = document.querySelector('#ideal').checked;
+    var creditcard = document.querySelector('#creditcard').checked;
+    var bankSelectInput = document.querySelector('#bank-select-input');
+    var creditCardSelectInput = document.querySelector('#creditcard-select-input');
+    var idealRadioButton = document.querySelector('#ideal').checked;
+    if (ideal && bankSelectInput.classList.contains(hideClass)) {
+      showElement(bankSelectInput);
+      hideElement(creditCardSelectInput);
+    } else if (!ideal && creditcard && creditCardSelectInput.classList.contains(hideClass)) {
+      showElement(creditCardSelectInput);
+      hideElement(bankSelectInput);
     }
-    var hideElement = function (el) {
-        el.className += (" " + hideClass);
-        el.querySelector('.input').removeAttribute("required");
+  });
+  anonymousCheckbox.addEventListener("change", function () {
+    if (anonymousCheckbox.checked && !personalDataForm.classList.contains(hideClass)) {
+      personalDataForm.className += (" " + hideClass);
+      removeRequiredOnInput(personalDataForm);
+    } else if (!anonymousCheckbox.checked && personalDataForm.classList.contains(hideClass)) {
+      personalDataForm.classList.remove(hideClass);
+      addRequiredOnInput(personalDataForm);
     }
-    var addRequiredOnInput = function (el) {
-        el.querySelectorAll('input').forEach(function (inputEl) {
-            if (inputEl.hasAttribute("notrequired"))
-                inputEl.setAttribute("required", "");
-            inputEl.removeAttribute("notrequired");
+  });
+  // FORM SUBMIT
+  document.addEventListener("submit", function () {
+    event.preventDefault();
+    donate();
+  });
+  var toggleErrorNotification = function (showError) {
+    showError ? errorNotificationElement.classList.remove(hideClass) : errorNotificationElement.className += (" " + hideClass);
+  };
+  function donate() {
+    toggleErrorNotification(false);
+    var donationData;
+    var personalDataObj = {};
+    var anonymous = document.querySelector('#anonymous').checked;
+    var agreedOnTerms = document.querySelector('#terms').checked;
+    var newsletter = document.querySelector('#newsletter').checked;
+    // Get payment data
+    var paymentMethod = document.querySelector('input[name=paymentmethod]:checked').value;
+    var issuer = document.querySelector("#" + paymentMethod + "-select").value;
+    var amountSelectValue = document.querySelector('input[name=amount]:checked').value;
+    var amount;
+    if (amountSelectValue === 'other') {
+      amount = document.querySelector("#other-amount-input input").value;
+    } else {
+      amount = amountSelectValue;
+    }
+    donationData = {
+        payment: {
+        paymentMethod,
+        issuer,
+        amount
+        },
+      newsletter,
+      agreedOnTerms
+    };
+    if (!anonymous) {
+      // Get personal data
+      personalDataForm.querySelectorAll('input[type="text"]').forEach(
+        function (item) {
+          if (item.value === "") return;
+          personalDataObj[item.id] = item.value;
         });
+      personalDataObj.gender = personalDataForm.querySelector('input:checked').value;
+      donationData.member = personalDataObj
     }
-    var removeRequiredOnInput = function (el) {
-        el.querySelectorAll('input').forEach(function (inputEl) {
-            inputEl.setAttribute("notrequired", "");
-            inputEl.removeAttribute("required");
-        });
-    }
-    // SETTING UP FORM
-    bankOptions.forEach(function (item) {
-        bankSelectElement.appendChild(getOptionElement(item));
-    });
-    var creditcardSelectElement = document.querySelector("#creditcard-select");
-    creditCardOptions.forEach(function (item) {
-        creditcardSelectElement.appendChild(getOptionElement(item));
-    });
-    // VISIBILITY TOGGLES
-    amountRadioButtons.addEventListener('click', function () {
-        var otherAmountRadio = amountRadioButtons.querySelector('#amount-other');
-        var otherAmountInput = document.querySelector('#other-amount-input');
-        var otherAmountRadio = otherAmountRadio.checked;
-        var otherAmountInputHidden = otherAmountInput.classList.contains(hideClass);
-        if (otherAmountRadio && otherAmountInputHidden) {
-            showElement(otherAmountInput);
-        } else if (!otherAmountRadio && !otherAmountInputHidden) {
-            hideElement(otherAmountInput);
-        }
-    });
-    paymentMethodRadioButtons.addEventListener("click", function () {
-        var ideal = document.querySelector('#ideal').checked;
-        var creditcard = document.querySelector('#creditcard').checked;
-        var bankSelectInput = document.querySelector('#bank-select-input');
-        var creditCardSelectInput = document.querySelector('#creditcard-select-input');
-        var idealRadioButton = document.querySelector('#ideal').checked;
-        if (ideal && bankSelectInput.classList.contains(hideClass)) {
-            showElement(bankSelectInput);
-            hideElement(creditCardSelectInput);
-        } else if (!ideal && creditcard && creditCardSelectInput.classList.contains(hideClass)) {
-            showElement(creditCardSelectInput);
-            hideElement(bankSelectInput);
-        }
-    });
-    anonymousCheckbox.addEventListener("change", function () {
-        if (anonymousCheckbox.checked && !personalDataForm.classList.contains(hideClass)) {
-            personalDataForm.className += (" " + hideClass);
-            removeRequiredOnInput(personalDataForm);
-        } else if (!anonymousCheckbox.checked && personalDataForm.classList.contains(hideClass)) {
-            personalDataForm.classList.remove(hideClass);
-            addRequiredOnInput(personalDataForm);
-        }
-    });
-    // FORM SUBMIT
-    document.addEventListener("submit", function () {
-        event.preventDefault();
-        donate();
-    });
-    var toggleErrorNotification = function (showError) {
-        showError ? errorNotificationElement.classList.remove(hideClass) : errorNotificationElement.className += (" " + hideClass);
-    }
-    function donate() {
-        toggleErrorNotification(false);
-        var donationData;
-        var personalDataObj = {};
-        var anonymous = document.querySelector('#anonymous').checked;
-        var agreedOnTerms = document.querySelector('#terms').checked;
-        var newsletter = document.querySelector('#newsletter').checked;
-// Get payment data
-        var paymentMethod = document.querySelector('input[name=paymentmethod]:checked').value;
-        var issuer = document.querySelector("#bank-select").value;
-        var amountSelectValue = document.querySelector('input[name=amount]:checked').value;
-        var amount;
-        if (amountSelectValue === 'other') {
-            amount = document.querySelector("#other-amount-input input").value;
-        } else {
-            amount = amountSelectValue;
-        }
-        donationData = {
-            issuer,
-            amount,
-            newsletter,
-            agreedOnTerms
-        }
-        if (!anonymous) {
-// Get personal data
-            personalDataForm.querySelectorAll('input[type="text"]').forEach(
-                function (item) {
-                    if (item.value === "") return;
-                    personalDataObj[item.id] = item.value;
-                });
-            personalDataObj.gender = personalDataForm.querySelector('input:checked').value;
-            donationData.member = personalDataObj
-        }
-        var xhrObj = {
-            'type': 'POST',
-            'url': '/api/donations/donate',
-            'contentType': 'application/json',
-            'data': JSON.stringify(donationData),
-            'dataType': 'text',
-            'success': function (response) {
-                window.location.href = response;
-            },
-            'error': function (error) {
-                toggleErrorNotification(true);
-            }
-        };
-        return jQuery.ajax(xhrObj);
-    }
+    var xhrObj = {
+      'type': 'POST',
+      'url': '/api/donations/donate',
+      'contentType': 'application/json',
+      'data': JSON.stringify(donationData),
+      'dataType': 'text',
+      'success': function (response) {
+        window.location.href = response;
+      },
+      'error': function (error) {
+        toggleErrorNotification(true);
+      }
+    };
+    return jQuery.ajax(xhrObj);
+  }
 </script>
