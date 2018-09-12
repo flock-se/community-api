@@ -42,7 +42,7 @@ class DonationTable extends React.Component {
                 <TableCell component="th" scope="row">{this.memberToName(it.member)}</TableCell>
                 <TableCell>{it.frequency}</TableCell>
                 <TableCell>{it.amount}</TableCell>
-                <TableCell>{it.date}</TableCell>
+                <TableCell>{this.getFormattedDate(it.date)}</TableCell>
                 <TableCell>
                   {status === 'PENDING' ?  <Chip label="Pending" style={{backgroundColor: 'orange'}}/> : null}
                   {status === 'ERROR' ?  <Chip label="Error" style={{backgroundColor: 'red'}}/> : null}
@@ -70,6 +70,11 @@ class DonationTable extends React.Component {
     if (this.props.handleRowClick)
       return this.props.handleRowClick(event, user)
     console.log(user)
+  }
+
+  getFormattedDate(dateStr) {
+    const dateStrSplitArr = dateStr.split(/[T\.]+/);
+    return `${dateStrSplitArr[0]} ${dateStrSplitArr[1]}`;
   }
 
 }
