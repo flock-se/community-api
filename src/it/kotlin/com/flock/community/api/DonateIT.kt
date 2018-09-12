@@ -4,9 +4,9 @@ package com.flock.community.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.flock.community.api.controllers.DonationsController
 import com.flock.community.api.repositories.DonationRepository
-import com.flock.community.api.service.PaymentBuckarooService
 import community.flock.eco.feature.member.model.Member
 import community.flock.eco.feature.member.repositories.MemberRepository
+import community.flock.eco.feature.payment.services.PaymentBuckarooService
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

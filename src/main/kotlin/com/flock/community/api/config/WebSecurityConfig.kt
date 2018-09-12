@@ -26,11 +26,11 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
 
         http
                 .authorizeRequests()
-                .antMatchers("/login**", "/webjars/**", "/error**", "/resources/**").permitAll()
+                .antMatchers("/login**").permitAll()
                 .antMatchers("/_ah/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/donations/donate").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/payment/buckaroo/**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().hasRole("USER")
                 .and()
                 .csrf().disable()
 
@@ -41,6 +41,7 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
         return PrincipalExtractor {
             val reference = it.get("email").toString()
 
+            val count = userRepository.count()
             val user = userRepository.findByReference(reference)
 
             if (!user.isPresent) {
@@ -48,14 +49,7 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
                         reference = reference,
                         name = it.get("name").toString(),
                         email = it.get("email").toString(),
-                        authorities = setOf(
-                                UserAuthority.READ.toName(),
-                                UserAuthority.WRITE.toName(),
-                                PaymentAuthority.READ.toName(),
-                                PaymentAuthority.WRITE.toName(),
-                                MemberAuthority.READ.toName(),
-                                MemberAuthority.WRITE.toName()
-                        )
+                        authorities = if(count == 0L) setOf(UserAuthority.WRITE.toName(), UserAuthority.WRITE.toName()) else setOf()
                 ))
             } else {
                 user.get()
@@ -69,7 +63,10 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
         return AuthoritiesExtractor {
             val reference = it.get("email").toString()
             val user = userRepository.findByReference(reference)
-            user.map { it.authorities.map { SimpleGrantedAuthority(it) }}.orElse(listOf())
+            user
+                    .filter { it.authorities.isNotEmpty() }
+                    .map { it.authorities.map { SimpleGrantedAuthority(it) } + listOf(SimpleGrantedAuthority("ROLE_USER")) }
+                    .orElse(listOf())
         }
     }
 

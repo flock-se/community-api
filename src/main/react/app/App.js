@@ -5,8 +5,8 @@ import {HashRouter, Route} from 'react-router-dom'
 import AppLayout from './AppLayout'
 
 import DonationFeature from '../donation/DonationFeature'
-import MemberFeature from 'eco-feature-member/member/MemberFeature'
-import UserFeature from 'eco-feature-user/user/UserFeature'
+import MemberFeature from 'flock-eco-feature-member/member/MemberFeature'
+import UserFeature from 'flock-eco-feature-user/user/UserFeature'
 
 import AppSettings from './AppSettings'
 
