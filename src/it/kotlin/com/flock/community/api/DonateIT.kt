@@ -4,6 +4,7 @@ package com.flock.community.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.flock.community.api.controllers.DonationsController
 import com.flock.community.api.repositories.DonationRepository
+import com.flock.community.api.service.PaymentBuckarooService
 import community.flock.eco.feature.member.model.Member
 import community.flock.eco.feature.member.repositories.MemberRepository
 import org.junit.Assert.*
@@ -49,10 +50,15 @@ class DonateIT {
                 email = email
         )
 
+        val payment = DonationsController.Payment(
+                paymentMethod = PaymentBuckarooService.PaymentMethod.IDEAL,
+                amount = 10.00,
+                issuer = "INGBNL2A"
+        )
+
         val donate = DonationsController.Donate(
                 member = member,
-                amount = 10.00,
-                issuer = "INGBNL2A",
+                payment = payment,
                 agreeOnTerms = true,
                 newsletter = true
         )
@@ -75,7 +81,7 @@ class DonateIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"Transaction\": {\"Key\": \"${donationList.first().transactions.first().reference}\"}}"))
                 .andDo(print())
-                .andExpect(status().is2xxSuccessful())
+                .andExpect(status().is2xxSuccessful)
 
 
         val donationListConfirmed = donationRepository.findByMemberId(memberRes.id)
@@ -86,10 +92,14 @@ class DonateIT {
 
     @Test
     fun donationAnoniem() {
+        val payment = DonationsController.Payment(
+                paymentMethod = PaymentBuckarooService.PaymentMethod.CREDITCARD,
+                amount = 10.00,
+                issuer = "visa"
+        )
 
         val donate = DonationsController.Donate(
-                amount = 10.00,
-                issuer = "INGBNL2A",
+                payment = payment,
                 agreeOnTerms = true,
                 newsletter = true
         )
@@ -98,8 +108,7 @@ class DonateIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsBytes(donate)))
                 .andDo(print())
-                .andExpect(status().isOk())
-
+                .andExpect(status().is2xxSuccessful)
 
     }
 

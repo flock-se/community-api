@@ -21,5 +21,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 class WebMvcConfig : WebMvcConfigurer{
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry.addResourceHandler("/ui/**")
-                .addResourceLocations("/ui/", "classpath:/")
+                .addResourceLocations("/index.html", "classpath:/index.html")
+                .addResourceLocations("/main.js", "classpath:/main.js")
+                .addResourceLocations("/donation.html", "classpath:/donation.html")
     }}
