@@ -1,3 +1,26 @@
+<style>
+    @keyframes spinner {
+        to {transform: rotate(360deg);}
+    }
+
+    .spinner:after {
+        content: '';
+        box-sizing: border-box;
+        width: 20px;
+        height: 20px;
+        margin-top: 1px;
+        margin-left: 10px;
+        border-radius: 50%;
+        border-top: 2px solid #ffffff;
+        border-right: 2px solid transparent;
+        animation: spinner .7s linear infinite;
+    }
+    .btn {
+        display:flex!important;
+        font-weight: 600!important;
+        padding: 5px 10px!important;
+    }
+</style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <form id="donation">
@@ -262,8 +285,19 @@
   var toggleErrorNotification = function (showError) {
     showError ? errorNotificationElement.classList.remove(hideClass) : errorNotificationElement.className += (" " + hideClass);
   };
+  var toggleSpinner = function(showSpinner) {
+      var submitButton = document.querySelector('button[type="submit"]');
+      if (showSpinner) {
+          submitButton.className += (" " + 'spinner');
+          submitButton.disabled = true;
+      } else {
+          submitButton.classList.remove('spinner');
+          submitButton.disabled = false;
+      }
+  };
   function donate() {
     toggleErrorNotification(false);
+    toggleSpinner(true);
     var donationData;
     var personalDataObj = {};
     var anonymous = document.querySelector('#anonymous').checked;
@@ -309,6 +343,7 @@
       },
       'error': function (error) {
         toggleErrorNotification(true);
+        toggleSpinner(false);
       }
     };
     return jQuery.ajax(xhrObj);
