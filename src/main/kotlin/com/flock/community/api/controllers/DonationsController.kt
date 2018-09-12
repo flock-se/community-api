@@ -3,10 +3,10 @@ package com.flock.community.api.controllers
 import com.flock.community.api.model.Donation
 import com.flock.community.api.model.Frequency
 import com.flock.community.api.repositories.DonationRepository
-import com.flock.community.api.service.PaymentBuckarooService
 import community.flock.eco.feature.member.model.Member
 import community.flock.eco.feature.payment.model.PaymentTransaction
 import community.flock.eco.feature.payment.model.PaymentTransactionStatus
+import community.flock.eco.feature.payment.services.PaymentBuckarooService
 import org.springframework.web.bind.annotation.*
 import java.util.*
 

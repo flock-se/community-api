@@ -27,6 +27,7 @@ class DonationTable extends React.Component {
               <TableCell>Name</TableCell>
               <TableCell>Frequency</TableCell>
               <TableCell>Amount</TableCell>
+              <TableCell>Date</TableCell>
               <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
@@ -38,17 +39,14 @@ class DonationTable extends React.Component {
                 hover
                 onClick={event => this.handleClick(it)}
               >
-                <TableCell component="th" scope="row">
-                  <Link to={`/members/${it.member.id}`}>{this.memberToName(it.member)}</Link>
-                </TableCell>
+                <TableCell component="th" scope="row">{this.memberToName(it.member)}</TableCell>
                 <TableCell>{it.frequency}</TableCell>
                 <TableCell>{it.amount}</TableCell>
+                <TableCell>{it.date}</TableCell>
                 <TableCell>
                   {status === 'PENDING' ?  <Chip label="Pending" style={{backgroundColor: 'orange'}}/> : null}
                   {status === 'ERROR' ?  <Chip label="Error" style={{backgroundColor: 'red'}}/> : null}
                   {status === 'SUCCESS' ?  <Chip label="Success" style={{backgroundColor: 'green'}}/> : null}
-
-
                 </TableCell>
               </TableRow>
             )
@@ -60,6 +58,8 @@ class DonationTable extends React.Component {
   }
 
   memberToName(member) {
+    if(!member)
+      return 'Anonymous'
     if (member.infix) {
       return `${member.firstName} ${member.infix} ${member.surName}`
     }
