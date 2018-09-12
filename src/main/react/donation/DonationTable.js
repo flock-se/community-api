@@ -41,7 +41,7 @@ class DonationTable extends React.Component {
               >
                 <TableCell component="th" scope="row">{this.memberToName(it.member)}</TableCell>
                 <TableCell>{it.frequency}</TableCell>
-                <TableCell>{it.amount}</TableCell>
+                <TableCell>&euro; {it.amount},-</TableCell>
                 <TableCell>{this.getFormattedDate(it.date)}</TableCell>
                 <TableCell>
                   {status === 'PENDING' ?  <Chip label="Pending" style={{backgroundColor: 'orange'}}/> : null}
