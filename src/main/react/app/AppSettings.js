@@ -11,7 +11,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import MemberGroupFeature from 'eco-feature-member/member_group/MemberGroupFeature'
+import MemberGroupFeature from 'flock-eco-feature-member/member_group/MemberGroupFeature'
 
 const styles = {}
 
