@@ -1,6 +1,8 @@
 package com.flock.community.api.service
 
+import community.flock.eco.core.services.EventService
 import community.flock.eco.core.services.MailService
+import community.flock.eco.feature.payment.event.PaymentSuccessEvent
 import community.flock.eco.feature.user.model.User
 import org.springframework.stereotype.Service
 import java.security.Principal
@@ -16,10 +18,16 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
 @Service
-open class MailServiceImpl : MailService {
+open class MailServiceImpl(private val eventService: EventService) : MailService {
 
     val properties: Properties = Properties();
     val session : Session = Session.getDefaultInstance(properties, null)
+
+    init {
+        eventService.registerEventListener(PaymentSuccessEvent::class.java) {
+            println("yolo")
+        }
+    }
 
     override fun sendMail(principal: Principal) {
         val auth = principal as OAuth2Authentication
