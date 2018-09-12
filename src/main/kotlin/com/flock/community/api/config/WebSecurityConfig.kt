@@ -41,6 +41,7 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
         return PrincipalExtractor {
             val reference = it.get("email").toString()
 
+            val count = userRepository.count()
             val user = userRepository.findByReference(reference)
 
             if (!user.isPresent) {
@@ -48,14 +49,7 @@ open class WebSecurityConfig() : WebSecurityConfigurerAdapter() {
                         reference = reference,
                         name = it.get("name").toString(),
                         email = it.get("email").toString(),
-                        authorities = setOf(
-                                UserAuthority.READ.toName(),
-                                UserAuthority.WRITE.toName(),
-                                PaymentAuthority.READ.toName(),
-                                PaymentAuthority.WRITE.toName(),
-                                MemberAuthority.READ.toName(),
-                                MemberAuthority.WRITE.toName()
-                        )
+                        authorities = if(count == 0L) setOf(UserAuthority.WRITE.toName(), UserAuthority.WRITE.toName()) else setOf()
                 ))
             } else {
                 user.get()
