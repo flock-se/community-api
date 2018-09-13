@@ -73,6 +73,7 @@ class DonationTable extends React.Component {
   }
 
   getFormattedDate(dateStr) {
+    if(!dateStr) return;
     const dateStrSplitArr = dateStr.split(/[T\.]+/);
     return `${dateStrSplitArr[0]} ${dateStrSplitArr[1]}`;
   }
