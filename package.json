@@ -26,6 +26,7 @@
     "@material-ui/icons": "^2.0.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-material-ui-form-validator": "^2.0.1",
     "react-router-dom": "^4.3.1"
   }
 }
