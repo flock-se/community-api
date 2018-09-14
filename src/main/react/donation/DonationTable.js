@@ -45,7 +45,7 @@ class DonationTable extends React.Component {
                 <TableCell>{this.getFormattedDate(it.date)}</TableCell>
                 <TableCell>
                   {status === 'PENDING' ?  <Chip label="Pending" style={{backgroundColor: '#ffd805', borderRadius: '0px', width: '80px'}}/> : null}
-                  {status === 'ERROR' ?  <Chip label="Error" classes={{button: {width: '50px'}}} style={{backgroundColor: '#ff3366', borderRadius: '0px', width: '80px'}}/> : null}
+                  {status === 'ERROR' ?  <Chip label="Error" style={{backgroundColor: '#ff3366', borderRadius: '0px', width: '80px'}}/> : null}
                   {status === 'SUCCESS' ?  <Chip label="Success" style={{backgroundColor: '#7ed321', borderRadius: '0px', width: '80px'}}/> : null}
                 </TableCell>
               </TableRow>
@@ -69,13 +69,26 @@ class DonationTable extends React.Component {
   handleClick(event, user) {
     if (this.props.handleRowClick)
       return this.props.handleRowClick(event, user)
-    console.log(user)
   }
 
   getFormattedDate(dateStr) {
     if(!dateStr) return;
     const dateStrSplitArr = dateStr.split(/[T\.]+/);
     return `${dateStrSplitArr[0]} ${dateStrSplitArr[1]}`;
+  }
+
+  desc(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  getSorting(order, orderBy) {
+    return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
   }
 
 }
