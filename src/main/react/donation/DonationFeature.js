@@ -22,14 +22,12 @@ class DonationFeature extends React.Component {
     }
 
     this.rowClick = (user) => {
-      console.log(user)
       this.setState({user})
     }
 
     fetch('/api/donations')
       .then(res => res.json())
       .then(json => {
-        console.log(json)
         this.setState({donations: json});
       });
 
