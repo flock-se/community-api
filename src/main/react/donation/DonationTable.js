@@ -44,9 +44,9 @@ class DonationTable extends React.Component {
                 <TableCell>&euro; {it.amount},-</TableCell>
                 <TableCell>{this.getFormattedDate(it.date)}</TableCell>
                 <TableCell>
-                  {status === 'PENDING' ?  <Chip label="Pending" style={{backgroundColor: 'orange'}}/> : null}
-                  {status === 'ERROR' ?  <Chip label="Error" style={{backgroundColor: 'red'}}/> : null}
-                  {status === 'SUCCESS' ?  <Chip label="Success" style={{backgroundColor: 'green'}}/> : null}
+                  {status === 'PENDING' ?  <Chip label="Pending" style={{backgroundColor: '#ffd805', borderRadius: '0px', width: '80px'}}/> : null}
+                  {status === 'ERROR' ?  <Chip label="Error" classes={{button: {width: '50px'}}} style={{backgroundColor: '#ff3366', borderRadius: '0px', width: '80px'}}/> : null}
+                  {status === 'SUCCESS' ?  <Chip label="Success" style={{backgroundColor: '#7ed321', borderRadius: '0px', width: '80px'}}/> : null}
                 </TableCell>
               </TableRow>
             )
