@@ -272,9 +272,11 @@
     if (anonymousCheckbox.checked && !personalDataForm.classList.contains(hideClass)) {
       personalDataForm.className += (" " + hideClass);
       removeRequiredOnInput(personalDataForm);
+      toggleNewsLetter(false);
     } else if (!anonymousCheckbox.checked && personalDataForm.classList.contains(hideClass)) {
       personalDataForm.classList.remove(hideClass);
       addRequiredOnInput(personalDataForm);
+      toggleNewsLetter(true)
     }
   });
   // FORM SUBMIT
@@ -293,6 +295,15 @@
       } else {
           submitButton.classList.remove('spinner');
           submitButton.disabled = false;
+      }
+  };
+  var toggleNewsLetter = function(enabledNewsletter) {
+      var newsletterCheckbox = document.querySelector('#newsletter');
+      if (enabledNewsletter) {
+          newsletterCheckbox.disabled = false;
+      } else {
+          newsletterCheckbox.checked = false;
+          newsletterCheckbox.disabled = true;
       }
   };
   function donate() {
