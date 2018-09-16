@@ -16,10 +16,10 @@ data class Donation(
         val amount: Double,
         val frequency: Frequency,
 
-        @ManyToOne(cascade = [CascadeType.ALL])
+        @ManyToOne()
         val member: Member?,
 
-        @OneToMany(cascade = [CascadeType.ALL])
+        @OneToMany()
         val transactions: Set<PaymentTransaction>
 
 )

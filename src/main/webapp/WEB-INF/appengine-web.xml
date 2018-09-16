@@ -11,7 +11,7 @@
     <instance-class>B2</instance-class>
     <basic-scaling>
         <max-instances>1</max-instances>
-        <idle-timeout>2m</idle-timeout>
+        <idle-timeout>30m</idle-timeout>
     </basic-scaling>
     <sessions-enabled>true</sessions-enabled>
 </appengine-web-app>

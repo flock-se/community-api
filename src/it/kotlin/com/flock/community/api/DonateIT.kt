@@ -59,7 +59,7 @@ class DonateIT {
         val donate = DonationsController.Donate(
                 member = member,
                 payment = payment,
-                agreeOnTerms = true,
+                agreedOnTerms = true,
                 newsletter = true
         )
 
@@ -100,7 +100,7 @@ class DonateIT {
 
         val donate = DonationsController.Donate(
                 payment = payment,
-                agreeOnTerms = true,
+                agreedOnTerms = true,
                 newsletter = true
         )
 
