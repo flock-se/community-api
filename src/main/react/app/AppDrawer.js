@@ -80,11 +80,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
-  },
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: "85px 20px"
+    ...theme.mixins.toolbar,
   },
 });
 
@@ -186,6 +182,7 @@ class AppDrawer extends React.Component {
         </List>
 
       </Drawer>
+
 
 
     );

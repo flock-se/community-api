@@ -17,13 +17,12 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: '100%',
     zIndex: 1,
-    overflow: 'hidden',
     position: 'relative',
     display: 'flex',
   },
   appBar: {
+    postion: 'fixed',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -71,11 +70,16 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
   },
-  content: {
+  main: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-    padding: "75px 20px"
+    height: '100vh',
+    overflow: 'scroll'
+  },
+  content: {
+    backgroundColor: theme.palette.background.default,
+    padding: '100px 24px 24px 24px',
+    overflow: 'hidden'
   },
 });
 
@@ -107,7 +111,7 @@ class AppLayout extends React.Component {
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
           <AppBar
-            position="absolute"
+            position="fixed"
             className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
           >
             <Toolbar disableGutters={!this.state.open}>
@@ -131,8 +135,10 @@ class AppLayout extends React.Component {
             theme={theme}
             open={this.state.open}/>
 
-          <main className={classes.content}>
-            {this.props.children}
+          <main className={classes.main}>
+            <div className={classes.content}>
+              {this.props.children}
+            </div>
           </main>
         </div>
       </MuiThemeProvider>
