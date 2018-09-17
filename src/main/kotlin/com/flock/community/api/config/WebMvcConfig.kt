@@ -12,12 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
 @Configuration
-@EnableJpaRepositories(basePackages = ["com.flock.community.api"])
-@ComponentScan(basePackages = ["com.flock.community.api"])
-@EntityScan("com.flock.community.api.*")
-@Import(UserConfiguration::class,
-        MemberConfiguration::class,
-        PaymentConfiguration::class)
 class WebMvcConfig : WebMvcConfigurer{
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry.addResourceHandler("/ui/**")
