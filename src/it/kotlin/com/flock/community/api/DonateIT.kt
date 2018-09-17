@@ -4,8 +4,10 @@ package com.flock.community.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.flock.community.api.controllers.DonationsController
 import com.flock.community.api.repositories.DonationRepository
+import community.flock.eco.feature.member.MemberConfiguration
 import community.flock.eco.feature.member.model.Member
 import community.flock.eco.feature.member.repositories.MemberRepository
+import community.flock.eco.feature.payment.PaymentConfiguration
 import community.flock.eco.feature.payment.services.PaymentBuckarooService
 import org.junit.Assert.*
 import org.junit.Test
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
@@ -26,6 +29,8 @@ import java.util.*
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
+@Import(MemberConfiguration::class,
+        PaymentConfiguration::class)
 class DonateIT {
 
     val mapper = ObjectMapper()

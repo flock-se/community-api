@@ -34,14 +34,7 @@ open class DonationsController(
         const val FIELD_AGREED_ON_TERMS = "agreed_on_terms"
     }
 
-    val groupDonation = memberGroupRepository
-            .findByCode(GROUP_DONATION)
-            .orElseGet {
-                memberGroupRepository.save(MemberGroup(
-                        name = "Donation",
-                        code = GROUP_DONATION
-                ))
-            }
+
 
     init {
 
@@ -64,7 +57,6 @@ open class DonationsController(
         }
     }
 
-    private fun isGroupPresent(code: String) = memberGroupRepository.findByCode(code).isPresent
     private fun isFieldPresent(field: String) = menberFieldRepository.findByName(field).isPresent
 
 
@@ -92,9 +84,18 @@ open class DonationsController(
     @PostMapping("/donate")
     fun donate(@RequestBody donate: Donate): String {
 
+//        val groupDonation = memberGroupRepository
+//                .findByCode(GROUP_DONATION)
+//                .orElseGet {
+//                    memberGroupRepository.save(MemberGroup(
+//                            name = "Donation",
+//                            code = GROUP_DONATION
+//                    ))
+//                }
+
         val member = donate.member?.let {
             menberRepository.save(it.copy(
-                    groups = setOf(groupDonation),
+//                    groups = setOf(groupDonation),
                     fields = mapOf(
                             FIELD_NEWSLETTER to donate.newsletter.toString().toLowerCase(),
                             FIELD_AGREED_ON_TERMS to donate.agreedOnTerms.toString().toLowerCase()
